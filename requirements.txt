@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+Flask-WTF
+Flask-Script
+Flask-Login
+Flask-Bootstrap
+Flask-Mail
+Flask-Misaka
+alembic
+feedparser

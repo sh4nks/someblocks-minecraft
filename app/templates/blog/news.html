@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<b>News</b><br />
+{% for post in posts %}
+    {% include 'blog/post_layout.html' %}
+{% endfor %}
+
+{% endblock %}
+

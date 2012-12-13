@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>New Post</h1><br />
+<form action="{{ url_for('blog.new_post') }}" method="post" name="new" class="form-horizontal_field">
+ {{ form.hidden_tag() }}
+Post Title:<br />
+{{ form.title }}<br />
+Content:<br />
+{{ form.body(style="width:820px;height:400px;")}}<br />
+
+<button type="submit" class="btn">Submit!</button>
+</form>
+{% endblock %}

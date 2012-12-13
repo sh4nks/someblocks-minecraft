@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<h2>SomeBlocks - Minecraft Server</h2>
+
+<div class="row-fluid">
+
+    <div class="span4">
+        <img src="/static/floating_islands.jpg" class="img-polaroid">
+    </div>
+
+    <div class="span8">
+        <p>On our server, we offer two different game worlds.
+          The creative world named "Asgard" and our survival world "Midgard".<br>
+          We run the (somehow unofficial) minecraft server wrapper Bukkit with a few <a href="{{ url_for('frontend.server') }}">plugins.</a><br>
+          On the left side you can see a picture of our floating island-city named Skypia.<br>
+          If you want to view our map please click this big blue button! :)</p>
+        <a class="btn btn-primary btn-large" href="/map">Live Map</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span4">
+        <h2>Server Status</h2>
+        {% if hostip %}
+            <p><b>Server Name: </b><span class="label label-info">{{ hostname }}</span></p>
+            <p><b>Server Status: </b>{% if hostip %}<span class="label label-success">online</span>{% else %}offline{% endif %}</p>
+            <p><b>Online Players: </b> {% if online %}{{ online }}{% else %}0{% endif %}/{{ maxplayers }}</p>
+        {% else %}
+            <b>Server offline</b>
+        {% endif %}
+    </div>
+    <div class="span4">
+        <h2>Online Players</h2>
+        <p>
+        {% if players %}
+            {% for i in range(0, players|count) %}
+                <b>{{ players[i] }}</b>
+            {% endfor %}
+        {% else %}
+               There are currently no players online!
+        {% endif %}
+        </p>
+    </div>
+    <div class="span4">
+        <h2>Minecraft News</h2>
+        {% for title, link in rss %}
+            <p><a href="{{ link }}">{{ title }}</a></p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

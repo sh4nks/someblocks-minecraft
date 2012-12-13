@@ -1,0 +1,18 @@
+server {
+    listen 80;
+    server_name someblocks.com www.someblocks.com;
+
+    root /var/www/someblocks/htdocs;
+
+    access_log /var/log/nginx/someblocks.access.log;
+    error_log /var/log/nginx/someblocks.error.log;
+
+    location / {
+        try_files $uri @proxy_to_app;
+    }
+
+    location @proxy_to_app {
+        uwsgi_pass 127.0.0.1:3001;
+        include uwsgi_params;
+    }
+}

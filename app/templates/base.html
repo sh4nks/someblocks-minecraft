@@ -1,0 +1,30 @@
+{% extends "bootstrap_responsive.html" %}
+{% import "bootstrap_wtf.html" as wtf %}
+
+{% block title %}
+    {% if title %}
+        {{ title }} - SomeBlocks
+    {% else %}
+        SomeBlocks - Minecraft Server
+    {% endif %}
+{% endblock %}
+
+{% block body_content %}
+    {% block navigation %}
+        {% include 'navigation.html' %}
+    {% endblock %}
+    {% block messages %}
+        {% include 'flashed_messages.html' %}
+    {% endblock %}
+    <div class="container">
+        {% block page_content %}{% endblock %}
+        <hr>
+        <div class="footer pull-left">
+            <p>Powered by Flask</p>
+        </div>
+        <div class="footer pull-right">
+            <p>&copy; 2012 - SomeBlocks.com</p>
+        </div>
+    </div>
+
+{% endblock %}

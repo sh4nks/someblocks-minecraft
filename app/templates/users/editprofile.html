@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>Edit your Profile</h1>
+<form action="{{ url_for('users.editprofile', username=g.user) }}" method="post" name="edit" class="form-horizontal_field well">
+    {{ form.hidden_tag() }}
+    <table>
+        <tr>
+            <td>Your Name:</td>
+            <td>{{ form.fullname }}</td>
+        </tr>
+        <tr>
+            <td>Location:</td>
+            <td>{{ form.location }}</td>
+        </tr>
+        <tr>
+            <td>Sex:</td>
+            <td>{{ form.sex }}</td>
+        </tr>
+        <tr>
+            <td>About Me:</td>
+            <td>{{ form.about_me(cols = 32, rows = 4) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit" class="btn">Save changes</button></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
