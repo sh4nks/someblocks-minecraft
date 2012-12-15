@@ -9,6 +9,7 @@ Feedback is very appreciated!
 
 btw, this app is currently in development - I'll add new features when I have time.
 
+Working example: [someblocks.com](http://someblocks.com/)
 
 LICENSE
 ============
