@@ -9,6 +9,7 @@ Feedback is very appreciated!
 
 btw, this app is currently in development - I'll add new features when I have time.
 
+Working example: [someblocks.com](http://someblocks.com/)
 
 LICENSE
 ============
@@ -90,3 +91,15 @@ How To
 * `python2 manage.py runserver`
 
     Running the development server
+
+To Do-List
+==============
+* Recovery E-Mail
+
+* Caching?
+
+* Groups (Admin, Member,...)
+
+* Comments
+
+* Maybe: Integrating a forum (MyBB?)
