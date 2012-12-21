@@ -3,7 +3,7 @@ from flask.ext.login import login_required
 
 from datetime import datetime
 
-from app import db
+from app import db, cache
 from app.models.users import User
 from app.models.blog import Post
 
@@ -12,6 +12,7 @@ from app.forms.blog import PostForm, CommentForm
 mod = Blueprint('blog', __name__, url_prefix='/news')
 
 @mod.route('/', methods=['GET'])
+#@cache.cached(300)
 def news():
     posts = Post.query.order_by(Post.pid.desc())
 

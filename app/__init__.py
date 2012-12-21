@@ -4,6 +4,8 @@ from flask.ext.login import LoginManager
 from flask.ext.mail import Mail
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.misaka import Misaka
+from flask.ext.cache import Cache
+
 from datetime import datetime
 
 app = Flask(__name__)
@@ -21,6 +23,9 @@ mail = Mail(app)
 Bootstrap(app)
 # Markdown
 Misaka(app)
+# Caching
+cache = Cache()
+cache.init_app(app)
 
 
 from app.views import admin, users, frontend, blog
@@ -40,7 +45,7 @@ def internal_error(error):
 
 def format_date(value, format='normal'):
     if format == 'normal':
-        format = '%Y-%m-%d @ %H:%M'
+        format = '%d.%m.%Y @ %H:%M'
     elif format == 'alphabet':
         format = '%b %d %Y'
     return value.strftime(format)

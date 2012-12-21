@@ -5,27 +5,19 @@ from werkzeug import check_password_hash, generate_password_hash
 from flask import Blueprint, request, render_template, flash, g, redirect, url_for
 from flask.ext.login import login_user, logout_user, login_required
 
-from app import db
+from app import app, db
 from app.forms.users import RegisterForm, LoginForm, ResetPasswordForm
 from app.models.users import User
 
-from settings import RSS_MCUPDATES
-
-from app.libs.mcstatus.minecraft_query import MinecraftQuery
+from app.helpers import get_minecraft_stats, get_rss_feed
 
 mod = Blueprint('frontend', __name__)
 
 
 @mod.route("/")
 def index():
-    try:
-        query = MinecraftQuery("someblocks.com", 25565, 1, 1)
-        full_stats = query.get_rules()
-    except:
-        full_stats = {"hostip": None, "players": None, "numplayers": None, "maxplayers": None}
-
-    d = feedparser.parse(RSS_MCUPDATES)
-    rss = [[d.entries[i].title, d.entries[i].link] for i in range(5)]
+    full_stats = get_minecraft_stats()
+    rss = get_rss_feed()
 
     return render_template("frontend/index.html",
                            title = "Home",
@@ -36,8 +28,7 @@ def index():
                            hostip = full_stats['hostip'],
                            players = full_stats['players'],
                            online = full_stats['numplayers'],
-                           maxplayers = full_stats['maxplayers']
-    )
+                           maxplayers = full_stats['maxplayers'])
 
 
 @mod.route("/login", methods=["GET", "POST"])
@@ -59,8 +50,7 @@ def login():
         form = form)
 
 
-@mod.route("/logout", methods=["GET"])
-@login_required
+@mod.route("/logout")
 def logout():
     logout_user()
     flash("You were logged out", "info")
@@ -72,6 +62,11 @@ def register():
     """
     Registration Form
     """
+
+    # Temporary: on my server I've disabled the registration
+    if not app.config['REGISTRATION']:
+        return redirect(url_for('frontend.index'))
+
     if g.user is not None and g.user.is_authenticated():
         return redirect(url_for('frontend.index'))
 
@@ -97,6 +92,12 @@ def reset_password():
     """
     Reset Password Form
     """
+
+    # This is only temporary.
+    if not app.config['REGISTRATION']:
+        return redirect(url_for('frontend.index'))
+
+
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()

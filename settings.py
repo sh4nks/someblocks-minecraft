@@ -16,11 +16,14 @@ CSRF_SESSION_KEY="reallyhardtoguess"
 
 # Auth
 AUTH_USER_MIXINS = []
-AUTH_LOGIN_VIEW = 'users.login'
+AUTH_LOGIN_VIEW = 'frontend.login'
 
 # Bootstrap
 BOOTSTRAP_USE_MINIFIED = False
 BOOTSTRAP_USE_CDN = False
+
+# Caching
+CACHE_TYPE = "simple"
 
 # Recaptcha
 RECAPTCHA_USE_SSL = False
@@ -38,3 +41,4 @@ DEFAULT_MAIL_SENDER = 'Admin <%s>' % MAIL_USERNAME
 
 # App specific configurations
 RSS_MCUPDATES = 'http://mcupdate.tumblr.com/rss'
+REGISTRATION = False
