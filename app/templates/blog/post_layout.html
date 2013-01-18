@@ -1,4 +1,5 @@
 
-<h1><a href="{{ url_for('blog.post', id=post.pid) }}">{{ post.title }}</a><small style="font-size:13px"> written by <a href="{{ url_for('users.profile', username=post.author) }}">{{ post.author }}</a> on {{ post.date_created|datetime('normal') }}</small></h1>
-<hr>
+<h1><a href="{{ url_for('blog.post', id=post.pid) }}">{{ post.title }}</a></h1>
+<small style="font-size:13px"> by <a href="{{ url_for('users.profile', username=post.author) }}">{{ post.author }}</a> on {{ post.date_created|datetime('normal') }}</small>
+<br /><br />
 {{ post.body | markdown}}<br />
