@@ -20,6 +20,10 @@
 </div>
 {% endmacro %}
 
+{% macro navlink(endpoint, name) %}
+        <li {% if endpoint == request.endpoint %} class="active"{% endif%}><a href={{ url_for(endpoint) }}>{{ name }}</a>
+{% endmacro %}
+
 {% macro form_errors(form, hiddens=True) %}
 {%- if form.errors %}
 {%- for fieldname, errors in form.errors.iteritems() %}

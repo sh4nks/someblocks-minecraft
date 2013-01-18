@@ -20,10 +20,8 @@ def index():
     rss = get_rss_feed()
 
     return render_template("frontend/index.html",
-                           title = "Home",
                            user = g.user,
                            rss = rss,
-                           active_index=True,
                            hostname = "someblocks.com",
                            hostip = full_stats['hostip'],
                            players = full_stats['players'],
@@ -46,7 +44,6 @@ def login():
             return redirect(request.args.get("next") or url_for("frontend.index"))
         flash("Wrong username or password", "error")
     return render_template("frontend/login.html",
-        title = "Login",
         form = form)
 
 
@@ -83,7 +80,6 @@ def register():
         flash("Thanks for registering")
         return redirect(url_for("users.profile", username=g.user.username))
     return render_template("frontend/register.html",
-        title = "Register",
         form = form)
 
 
@@ -108,7 +104,6 @@ def reset_password():
         flash("Please check your email to confirm your new password", "info")
         return redirect(url_for("frontend.login"))
     return render_template("frontend/reset_password.html",
-        title = "Reset Password",
         form = form)
 
 @mod.route("/server")

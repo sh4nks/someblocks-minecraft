@@ -7,5 +7,4 @@ mod = Blueprint('admin', __name__, url_prefix='/admin')
 @login_required
 def admin_panel():
     return render_template("admin/overview.html",
-                           title = "Admin Panel",
                            user = g.user)

@@ -35,7 +35,7 @@
         <p>
         {% if players %}
             {% for i in range(0, players|count) %}
-                <b>{{ players[i] }} {% if not loop.last %}, {% endif %}</b>
+                <b>{{ players[i] }}{% if not loop.last %},{% endif %}</b>
             {% endfor %}
         {% elif not hostip %}
                 Server is offline

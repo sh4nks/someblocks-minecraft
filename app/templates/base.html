@@ -2,17 +2,42 @@
 {% import "bootstrap_wtf.html" as wtf %}
 
 {% block title %}
-    {% if title %}
-        {{ title }} - SomeBlocks
-    {% else %}
-        SomeBlocks - Minecraft Server
-    {% endif %}
+    {{ page_title|default('SomeBlocks - Minecraft Server') }} - SomeBlocks
 {% endblock %}
 
 {% block body_content %}
+
     {% block navigation %}
-        {% include 'navigation.html' %}
+    {%- from 'macros/wtf_macros.html' import navlink with context-%}
+            <div class="navbar navbar-fixed-top navbar-inverse">
+                <div class="navbar-inner">
+                    <div class="container">
+                    <a class="brand" href="/">SomeBlocks</a>
+                        <ul class="nav">
+                            {{ navlink('frontend.index', 'Home') }}
+                            {{ navlink('blog.news', 'News') }}
+                            {{ navlink('frontend.worlds', 'Worlds') }}
+                            {{ navlink('frontend.about', 'About Us') }}
+                            <li><a href="/stats">Statistics</a></li>
+                            <li><a href="/map">Live Map</a></li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            <div class="btn-group">
+                            {% if current_user and current_user.is_authenticated() %}
+                                <a class="btn btn-primary" href="{{ url_for('users.profile', username=current_user.username) }}"><i class="icon-user icon-white"></i> {{ current_user.username }}</a>
+                                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('users.editprofile', username=current_user.username) }}"><i class="icon-pencil"></i> Edit</a></li>
+                                    <li><a href="{{ url_for('frontend.logout') }}"><i class="icon-off"></i> Logout</a></li>
+                                </ul>
+                            {% endif %}
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
     {% endblock %}
+
     {% block messages %}
         {% include 'flashed_messages.html' %}
     {% endblock %}
@@ -26,5 +51,4 @@
             <p>&copy; 2012 - <a href="https://github.com/sh4nks/someblocks">SomeBlocks.com</a></p>
         </div>
     </div>
-
 {% endblock %}

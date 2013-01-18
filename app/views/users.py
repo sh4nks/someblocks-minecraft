@@ -36,7 +36,6 @@ def profile(username):
         flash("User " + username + " not found", "info")
         return redirect(url_for("frontend.index"))
     return render_template("users/profile.html",
-        title = "Profile",
         user = user)
 
 @mod.route("/<username>/edit", methods=["GET", "POST"])
@@ -64,6 +63,5 @@ def editprofile(username):
     else:
         return redirect(url_for("frontend.index"))
     return render_template('users/editprofile.html',
-        title = "Edit Profile",
         user = user,
         form = form)

@@ -12,13 +12,11 @@ from app.forms.blog import PostForm, CommentForm
 mod = Blueprint('blog', __name__, url_prefix='/news')
 
 @mod.route('/', methods=['GET'])
-#@cache.cached(300)
 def news():
     posts = Post.query.order_by(Post.pid.desc())
 
     return render_template('blog/news.html',
                            title='News',
-                           active_blog=True,
                            posts = posts)
 
 
@@ -26,9 +24,7 @@ def news():
 def post(id):
     post = Post.query.filter_by(pid = id).first()
     return render_template('blog/post.html',
-                           title = post.title,
                            post = post,
-                           active_blog=True,
                            pid = post.pid)
 
 
@@ -46,9 +42,7 @@ def new_post():
         flash("Your post has been submitted!", "success")
         return redirect(url_for("blog.news"))
     return render_template('blog/new_post.html',
-                           title = "New Post",
-                           form = form,
-                           active_blog=True)
+                           form = form)
 
 @mod.route('/post/<id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -71,7 +65,5 @@ def edit_post(id):
         form.body.data = post.body
 
     return render_template('blog/edit_post.html',
-                           title = "Edit Post",
                            form = form,
-                           active_blog=True,
                            id = post.pid)
