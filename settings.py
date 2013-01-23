@@ -36,5 +36,12 @@ MAIL_PASSWORD = 'password_here'
 DEFAULT_MAIL_SENDER = 'Admin <%s>' % MAIL_USERNAME
 
 # App specific configurations
+## RSS
 RSS_MCUPDATES = 'http://mcupdate.tumblr.com/rss'
+
+## Minecraft Query
+MC_SERVER = 'someblocks.com'
+MC_PORT = 25565
+
+# I have disabled the registration on my server (this is only temporary)
 REGISTRATION = False

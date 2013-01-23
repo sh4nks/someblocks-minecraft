@@ -24,10 +24,11 @@
         <h2>Server Status</h2>
         {% if hostip %}
             <p><b>Server Name: </b><span class="label label-info">{{ hostname }}</span></p>
-            <p><b>Server Status: </b>{% if hostip %}<span class="label label-success">online</span>{% else %}offline{% endif %}</p>
+            <p><b>Server Status: </b><span class="label label-success">online</span></p>
             <p><b>Online Players: </b> {% if online %}{{ online }}{% else %}0{% endif %}/{{ maxplayers }}</p>
         {% else %}
-            <b>Server offline</b>
+            <p><b>Server Name: </b><span class="label label-info">{{ hostname }}</span></p>
+            <p><b>Server Status: </b><span class="label label-important">offline</span></p>
         {% endif %}
     </div>
     <div class="span4">
@@ -38,7 +39,7 @@
                 <b>{{ players[i] }}{% if not loop.last %},{% endif %}</b>
             {% endfor %}
         {% elif not hostip %}
-                Server is offline
+                The server is offline.
         {% else %}
                There are currently no players online!
         {% endif %}
@@ -46,9 +47,13 @@
     </div>
     <div class="span4">
         <h2>Minecraft News</h2>
-        {% for title, link in rss %}
-            <p><a href="{{ link }}">{{ title }}</a></p>
-        {% endfor %}
+        {% if rss %}
+            {% for title, link in rss %}
+                <p><a href="{{ link }}">{{ title }}</a></p>
+            {% endfor %}
+            {% else %}
+                <p>Couldn't find an RSS feed. Is your link correct?</p>
+        {% endif %}
     </div>
 </div>
 
