@@ -16,7 +16,6 @@ def news():
     posts = Post.query.order_by(Post.pid.desc())
 
     return render_template('blog/news.html',
-                           title='News',
                            posts = posts)
 
 

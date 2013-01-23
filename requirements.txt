@@ -3,8 +3,9 @@ Flask-SQLAlchemy
 Flask-WTF
 Flask-Script
 Flask-Login
-Flask-Bootstrap
 Flask-Mail
 Flask-Misaka
+Flask-Cache
 alembic
 feedparser
+git+https://github.com/tobiasandtobias/flask-alembic.git#egg=flask-alembic

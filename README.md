@@ -1,15 +1,11 @@
 Hey!
 ============
-I wanted to write an web application with python.. so I did :)
 
-Python is my first programming language that I've learned (self-assessment: beginner) but I think I'm getting better ^^
-
-Feedback is very appreciated!
-
-
-btw, this app is currently in development - I'll add new features when I have time.
+This app is currently in development
 
 Working example: [someblocks.com](http://someblocks.com/)
+
+Feedback is very appreciated!
 
 LICENSE
 ============
@@ -38,10 +34,6 @@ Dependencies
 
     `pip install flask-login`
 
-* Flask-Bootstrap
-
-    `pip install flask-bootstrap`
-
 * Flask-Script
 
     `pip install flask-script` - handles the manage.py file
@@ -50,9 +42,13 @@ Dependencies
 
     `pip install flask-misaka` - Markdown support
 
+* Flask-Cache
+
+    `pip install flask-cache` - Caching support
+
 * Flask-Alembic
 
-    `pip install -e git+https://github.com/tobiasandtobias/flask-alembic.git#egg=Package`
+    `pip install -e git+https://github.com/tobiasandtobias/flask-alembic.git#egg=flask-alembic`
 
 * alembic
 
@@ -92,7 +88,7 @@ How To
 
     Running the development server
 
-To Do-List
+ToDo-List
 ==============
 * Recovery E-Mail
 
