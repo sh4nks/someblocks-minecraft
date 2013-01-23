@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.mail import Mail
-from flask.ext.bootstrap import Bootstrap
 from flask.ext.misaka import Misaka
 from flask.ext.cache import Cache
 
@@ -19,8 +18,6 @@ lm.login_view = app.config.get('AUTH_LOGIN_VIEW')
 db = SQLAlchemy(app)
 # Mail
 mail = Mail(app)
-# Bootstrap
-Bootstrap(app)
 # Markdown
 Misaka(app)
 # Caching

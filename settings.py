@@ -18,10 +18,6 @@ CSRF_SESSION_KEY="reallyhardtoguess"
 AUTH_USER_MIXINS = []
 AUTH_LOGIN_VIEW = 'frontend.login'
 
-# Bootstrap
-BOOTSTRAP_USE_MINIFIED = False
-BOOTSTRAP_USE_CDN = False
-
 # Caching
 CACHE_TYPE = "simple"
 
