@@ -35,6 +35,7 @@ def login():
     """
     Login form
     """
+
     if g.user is not None and g.user.is_authenticated():
         return redirect(url_for('frontend.index'))
     form = LoginForm(request.form)

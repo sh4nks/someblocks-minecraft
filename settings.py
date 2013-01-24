@@ -11,8 +11,8 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(_basedir, 'db_repository')
 DATABASE_CONNECT_OPTIONS = {}
 
 # Protection against form post fraud
-CSRF_ENABLED=True
-CSRF_SESSION_KEY="reallyhardtoguess"
+CSRF_ENABLED = True
+CSRF_SESSION_KEY = "reallyhardtoguess"
 
 # Auth
 AUTH_USER_MIXINS = []
@@ -24,7 +24,7 @@ CACHE_TYPE = "simple"
 # Recaptcha
 RECAPTCHA_USE_SSL = False
 RECAPTCHA_PUBLIC_KEY = "6LfUZ9YSAAAAANtDdyew22z2lnjz-K0Dx8M-gkey"
-RECAPTCHA_PRIVATE_KEY= "6LfUZ9YSAAAAAHgDBflMFQTVdlTA3__yYx8CBGII"
+RECAPTCHA_PRIVATE_KEY = "6LfUZ9YSAAAAAHgDBflMFQTVdlTA3__yYx8CBGII"
 RECAPTCHA_OPTIONS = {"theme": "white"}
 
 # Mail

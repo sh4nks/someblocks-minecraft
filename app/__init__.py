@@ -5,7 +5,6 @@ from flask.ext.mail import Mail
 from flask.ext.misaka import Misaka
 from flask.ext.cache import Cache
 
-from datetime import datetime
 
 app = Flask(__name__)
 app.config.from_object("settings")
@@ -31,19 +30,22 @@ app.register_blueprint(users.mod)
 app.register_blueprint(frontend.mod)
 app.register_blueprint(blog.mod)
 
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template("404.html"), 404
+
 
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
     return render_template("500.html"), 500
 
-def format_date(value, format='normal'):
-    if format == 'normal':
-        format = '%d.%m.%Y @ %H:%M'
-    elif format == 'alphabet':
-        format = '%b %d %Y'
-    return value.strftime(format)
+
+def format_date(value, dateformat='normal'):
+    if dateformat == 'normal':
+        dateformat = '%d.%m.%Y @ %H:%M'
+    elif dateformat == 'alphabet':
+        dateformat = '%b %d %Y'
+    return value.strftime(dateformat)
 app.jinja_env.filters['datetime'] = format_date

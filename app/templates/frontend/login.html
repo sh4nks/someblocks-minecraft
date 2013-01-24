@@ -6,19 +6,8 @@
 <h1>Sign in</h1>
 <form method="POST" action="" name="login" class="form-horizontal">
     {{ form.hidden_tag() }}
-    {{ wtf.form_errors(form, "only") }}
-    <div class="control-group">
-        <label class="control-label" for="inputUsername">Username:</label>
-        <div class="controls">
-            {{ wtf.inline_field(form.username)}}
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputPassword">Password</label>
-        <div class="controls">
-            {{ wtf.inline_field(form.password)}}
-        </div>
-    </div>
+    {{ wtf.inline_field(form.username)}}
+    {{ wtf.inline_field(form.password)}}
     <div class="control-group">
         <div class="controls">
             <label class="checkbox">

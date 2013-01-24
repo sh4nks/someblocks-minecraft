@@ -1,12 +1,11 @@
-from flask.ext.wtf import (Form, TextField, HiddenField, RecaptchaField,
-                           Required, Email, Length, TextAreaField,
-                           URL, optional)
+from flask.ext.wtf import (Form, TextField, Required, Email, Length,
+                           TextAreaField, URL, optional)
 
 
 class PostForm(Form):
     title = TextField("Title:", validators=[
         Required(message="A title is required"),
-        Length(min = 0, max = 140)])
+        Length(min=0, max=140)])
 
     body = TextAreaField("Content:", validators=[
         Required(message="You can't submit a post without a content")])

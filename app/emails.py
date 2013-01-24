@@ -4,10 +4,10 @@ from app import mail
 from decorators import async
 
 
-def send_new_password(user, password):
+def send_new_password(user, pw):
     send_email("Password Reset", user.email,
-        render_template("email/reset_password.txt", user=user, password=password),
-        render_template("email/reset_password.html", user=user, password=password)
+        render_template("email/reset_password.txt", user=user, password=pw),
+        render_template("email/reset_password.html", user=user, password=pw)
     )
 
 

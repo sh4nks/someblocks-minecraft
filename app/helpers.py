@@ -12,7 +12,8 @@ def get_minecraft_stats():
         query = MinecraftQuery(MC_SERVER, MC_PORT, 1, 1)
         stats = query.get_rules()
     except:
-        stats = {"hostip": None, "players": None, "numplayers": None, "maxplayers": None}
+        stats = {"hostip": None, "players": None, "numplayers": None,
+                 "maxplayers": None}
     return stats
 
 

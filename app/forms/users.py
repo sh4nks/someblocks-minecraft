@@ -1,9 +1,7 @@
-from flask import request
-from flask.ext.wtf import (Form, TextField, PasswordField, BooleanField, HiddenField,
+from flask.ext.wtf import (Form, TextField, PasswordField, BooleanField,
                            RecaptchaField, Required, Email, EqualTo, Length,
                            TextAreaField, SelectField, ValidationError, regexp)
 
-from app import db
 from app.models.users import User
 
 
@@ -43,12 +41,12 @@ class RegisterForm(Form):
     #recaptcha = RecaptchaField()
 
     def validate_username(self, field):
-        user = User.query.filter_by(username = field.data).first()
+        user = User.query.filter_by(username=field.data).first()
         if user:
             raise ValidationError("This username is taken")
 
     def validate_email(self, field):
-        email = User.query.filter_by(email = field.data).first()
+        email = User.query.filter_by(email=field.data).first()
         if email:
             raise ValidationError("This email is taken")
 
@@ -62,22 +60,22 @@ class ResetPasswordForm(Form):
         Required(message="Username required")])
 
     def validate_username(self, field):
-        user = User.query.filter_by(username = field.data).first()
+        user = User.query.filter_by(username=field.data).first()
         if not user:
             raise ValidationError("Wrong username?")
 
     def validate_email(self, field):
-        email = User.query.filter_by(email = field.data).first()
+        email = User.query.filter_by(email=field.data).first()
         if not email:
             raise ValidationError("Wrong E-Mail?")
 
 
 class ProfileForm(Form):
     fullname = TextField("Your Name:", validators=[
-        Length(min = 0, max = 50)])
+        Length(min=0, max=50)])
 
     location = TextField("Location:", validators=[
-        Length(min = 0, max = 50)])
+        Length(min=0, max=50)])
 
     sex = SelectField("Sex:", default="Undisclose", choices=[
         ("Undisclose", "Undisclose"),
@@ -85,4 +83,4 @@ class ProfileForm(Form):
         ("Female", "Female")])
 
     about_me = TextAreaField("About Me:", validators=[
-        Length(min = 0, max = 140)])
+        Length(min=0, max=140)])

@@ -1,7 +1,4 @@
-from datetime import datetime
-
 from app import db
-from app.models.users import User
 
 
 class Post(db.Model):

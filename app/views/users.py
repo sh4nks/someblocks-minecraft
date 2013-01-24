@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, flash, g, redirect, url_for
+from flask import Blueprint, render_template, flash, g, redirect, url_for
 from flask.ext.login import current_user, login_required
 
 from datetime import datetime
@@ -13,6 +13,7 @@ mod = Blueprint('users', __name__, url_prefix='/user')
 @lm.user_loader
 def load_user(uid):
     return User.query.get(int(uid))
+
 
 @app.before_request
 def before_request():
@@ -29,20 +30,22 @@ def users():
         return redirect(url_for("users.profile", username=current_user))
     return redirect(url_for("frontend.login"))
 
+
 @mod.route("/<username>")
 def profile(username):
-    user = User.query.filter_by(username = username).first()
-    if user == None:
+    user = User.query.filter_by(username=username).first()
+    if user is None:
         flash("User " + username + " not found", "info")
         return redirect(url_for("frontend.index"))
     return render_template("users/profile.html",
-        user = user)
+        user=user)
+
 
 @mod.route("/<username>/edit", methods=["GET", "POST"])
 @login_required
 def editprofile(username):
     if username == g.user.username:
-        user = User.query.filter_by(username = username).first()
+        user = User.query.filter_by(username=username).first()
         form = ProfileForm()
         if form.validate_on_submit():
             user.fullname = form.fullname.data
@@ -63,5 +66,5 @@ def editprofile(username):
     else:
         return redirect(url_for("frontend.index"))
     return render_template('users/editprofile.html',
-        user = user,
-        form = form)
+        user=user,
+        form=form)
