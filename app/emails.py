@@ -6,8 +6,8 @@ from decorators import async
 
 def send_new_password(user, password):
     send_email("Password Reset", user.email,
-        render_template("email/reset_password.txt", user, password),
-        render_template("email/reset_password.html", user, password)
+        render_template("email/reset_password.txt", user=user, password=password),
+        render_template("email/reset_password.html", user=user, password=password)
     )
 
 
