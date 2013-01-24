@@ -58,13 +58,18 @@ class ResetPasswordForm(Form):
         Required(message="Email required"),
         Email(message="This email is invalid")])
 
-    password = PasswordField("New Password", validators=[
-        Required(message="Password required")])
+    username = TextField("Username", validators=[
+        Required(message="Username required")])
 
-    confirm_password = PasswordField("Confirm Password", [
-        Required(message="Confirm Password required"),
-        EqualTo("password", message="Passwords do not match")
-        ])
+    def validate_username(self, field):
+        user = User.query.filter_by(username = field.data).first()
+        if not user:
+            raise ValidationError("Wrong username?")
+
+    def validate_email(self, field):
+        email = User.query.filter_by(email = field.data).first()
+        if not email:
+            raise ValidationError("Wrong E-Mail?")
 
 
 class ProfileForm(Form):

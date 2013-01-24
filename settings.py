@@ -27,13 +27,11 @@ RECAPTCHA_PUBLIC_KEY = "6LfUZ9YSAAAAANtDdyew22z2lnjz-K0Dx8M-gkey"
 RECAPTCHA_PRIVATE_KEY= "6LfUZ9YSAAAAAHgDBflMFQTVdlTA3__yYx8CBGII"
 RECAPTCHA_OPTIONS = {"theme": "white"}
 
-# TODO: Mail
-MAIL_SERVER = 'smtp.gmail.com'
-MAIL_PORT = 465
-MAIL_USE_SSL = True
-MAIL_USERNAME = 'username@gmail.com'
-MAIL_PASSWORD = 'password_here'
-DEFAULT_MAIL_SENDER = 'Admin <%s>' % MAIL_USERNAME
+# Mail
+MAIL_SERVER = 'localhost'
+MAIL_PORT = 25
+MAIL_USERNAME = 'SomeBlocks Info'
+DEFAULT_MAIL_SENDER = 'noreply@someblocks.com'
 
 # App specific configurations
 ## RSS
@@ -44,4 +42,4 @@ MC_SERVER = 'someblocks.com'
 MC_PORT = 25565
 
 # I have disabled the registration on my server (this is only temporary)
-REGISTRATION = False
+REGISTRATION = True

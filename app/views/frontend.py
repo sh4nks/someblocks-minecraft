@@ -8,8 +8,9 @@ from flask.ext.login import login_user, logout_user, login_required
 from app import app, db
 from app.forms.users import RegisterForm, LoginForm, ResetPasswordForm
 from app.models.users import User
+from app.helpers import get_minecraft_stats, get_rss_feed, generate_random_pass
+from app.emails import send_new_password
 
-from app.helpers import get_minecraft_stats, get_rss_feed
 
 mod = Blueprint('frontend', __name__)
 
@@ -93,16 +94,23 @@ def reset_password():
     if not app.config['REGISTRATION']:
         return redirect(url_for('frontend.index'))
 
-
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        user.password = generate_password_hash(form.password.data)
-        db.session.commit()
+        user1 = User.query.filter_by(email=form.email.data).first()
+        user2 = User.query.filter_by(username=form.username.data).first()
 
-        # TODO: Sending an email
-        flash("Please check your email to confirm your new password", "info")
-        return redirect(url_for("frontend.login"))
+        if user1.email == user2.email:
+            password = generate_random_pass()
+            user.password = generate_password_hash(password)
+            db.session.commit()
+
+            send_new_password(user, password)
+
+            flash("E-Mail sent! Please check your inbox.", "info")
+            return redirect(url_for("frontend.login"))
+        else:
+            flash("You have entered an username or email that is not linked with your account")
+
     return render_template("frontend/reset_password.html",
         form = form)
 

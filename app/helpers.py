@@ -1,3 +1,4 @@
+import random
 import feedparser
 
 from settings import MC_SERVER, MC_PORT, RSS_MCUPDATES
@@ -14,6 +15,7 @@ def get_minecraft_stats():
         stats = {"hostip": None, "players": None, "numplayers": None, "maxplayers": None}
     return stats
 
+
 @cache.cached(timeout=300, key_prefix="rss_feed")
 def get_rss_feed():
     try:
@@ -22,3 +24,7 @@ def get_rss_feed():
     except:
         rss = None
     return rss
+
+
+def generate_random_pass(length=8):
+    return ''.join(chr(random.randint(33, 126)) for i in range(length))
