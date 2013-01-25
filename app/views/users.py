@@ -7,7 +7,7 @@ from app import app, db, lm
 from app.forms.users import ProfileForm
 from app.models.users import User
 
-mod = Blueprint('users', __name__, url_prefix='/user')
+mod = Blueprint("users", __name__, url_prefix="/user")
 
 
 @lm.user_loader
@@ -65,6 +65,6 @@ def editprofile(username):
             form.about_me.data = g.user.about_me
     else:
         return redirect(url_for("frontend.index"))
-    return render_template('users/editprofile.html',
+    return render_template("users/editprofile.html",
         user=user,
         form=form)

@@ -12,7 +12,7 @@ from app.helpers import get_minecraft_stats, get_rss_feed, generate_random_pass
 from app.emails import send_new_password
 
 
-mod = Blueprint('frontend', __name__)
+mod = Blueprint("frontend", __name__)
 
 
 @mod.route("/")
@@ -24,10 +24,10 @@ def index():
                            user=g.user,
                            rss=rss,
                            hostname="someblocks.com",
-                           hostip=full_stats['hostip'],
-                           players=full_stats['players'],
-                           online=full_stats['numplayers'],
-                           maxplayers=full_stats['maxplayers'])
+                           hostip=full_stats["hostip"],
+                           players=full_stats["players"],
+                           online=full_stats["numplayers"],
+                           maxplayers=full_stats["maxplayers"])
 
 
 @mod.route("/login", methods=["GET", "POST"])
@@ -37,7 +37,7 @@ def login():
     """
 
     if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('frontend.index'))
+        return redirect(url_for("frontend.index"))
     form = LoginForm(request.form)
     if form.validate_on_submit() or request.method == "POST":
         user = User.query.filter_by(username=form.username.data).first()
@@ -65,12 +65,12 @@ def register():
     Registration Form
     """
 
-    # Temporary: on my server I've disabled the registration
-    if not app.config['REGISTRATION']:
-        return redirect(url_for('frontend.index'))
+    # Temporary: on my server I"ve disabled the registration
+    if not app.config["REGISTRATION"]:
+        return redirect(url_for("frontend.index"))
 
     if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('frontend.index'))
+        return redirect(url_for("frontend.index"))
 
     form = RegisterForm(request.form)
     if form.validate_on_submit():
@@ -95,8 +95,8 @@ def reset_password():
     """
 
     # This is only temporary.
-    if not app.config['REGISTRATION']:
-        return redirect(url_for('frontend.index'))
+    if not app.config["REGISTRATION"]:
+        return redirect(url_for("frontend.index"))
 
     form = ResetPasswordForm(request.form)
     if form.validate_on_submit():

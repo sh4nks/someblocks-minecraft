@@ -16,7 +16,7 @@ class User(db.Model):
     regdate = db.Column(db.DateTime)
     timeonline = db.Column(db.DateTime)
     usergroup = db.Column(db.Integer, db.ForeignKey("usergroups.gid"))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    posts = db.relationship("Post", backref="author", lazy="dynamic")
 
     def __init__(self, username=None, email=None, password=None):
         self.username = username

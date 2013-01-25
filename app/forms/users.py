@@ -5,7 +5,7 @@ from flask.ext.wtf import (Form, TextField, PasswordField, BooleanField,
 from app.models.users import User
 
 
-is_username = regexp(r'^[\w.+-]+$',
+is_username = regexp(r"^[\w.+-]+$",
                      message="You can only use letters, numbers or dashes")
 
 

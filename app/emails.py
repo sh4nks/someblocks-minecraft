@@ -16,7 +16,7 @@ def send_async_email(msg):
     mail.send(msg)
 
 
-def send_email(subject, recipients, text_body, html_body, sender=''):
+def send_email(subject, recipients, text_body, html_body, sender=""):
     if not sender:
         msg = Message(subject, recipients=recipients)
     else:

@@ -28,4 +28,4 @@ def get_rss_feed():
 
 
 def generate_random_pass(length=8):
-    return ''.join(chr(random.randint(33, 126)) for i in range(length))
+    return "".join(chr(random.randint(33, 126)) for i in range(length))

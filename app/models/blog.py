@@ -8,4 +8,4 @@ class Post(db.Model):
     title = db.Column(db.String)
     body = db.Column(db.Text)
     date_created = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.uid'))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.uid"))
