@@ -8,7 +8,7 @@ class PostForm(Form):
         Length(min=0, max=140)])
 
     body = TextAreaField("Content:", validators=[
-        Required(message="You can"t submit a post without a content")])
+        Required(message="You can't submit a post without a content")])
 
 
 class CommentForm(Form):
@@ -24,4 +24,4 @@ class CommentForm(Form):
         URL(message="A valid URL is required")])
 
     comment = TextAreaField("Comment:", validators=[
-        Required(message="You cant submit a comment without a comment")])
+        Required(message="You can't submit a comment without content")])
