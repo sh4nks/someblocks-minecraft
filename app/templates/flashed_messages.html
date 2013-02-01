@@ -1,7 +1,7 @@
-<div class="container">
-<p>
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
+    <div class="container">
+        <p>
         {% for category, message in messages %}
             {% if category == 'error' %}
                 {% set icon = 'icon-exclamation-sign' %}
@@ -16,7 +16,7 @@
                 {{ message }}
             </div>
         {% endfor %}
+        </p>
+    </div>
     {% endif %}
 {% endwith %}
-</p>
-</div>
