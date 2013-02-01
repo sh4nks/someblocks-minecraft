@@ -59,7 +59,7 @@ def logout():
     return redirect(url_for("frontend.index"))
 
 
-@mod.route("/register/", methods=["GET", "POST"])
+@mod.route("/register", methods=["GET", "POST"])
 def register():
     """
     Registration Form
