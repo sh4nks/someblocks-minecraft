@@ -67,6 +67,7 @@ def register():
 
     # Temporary: on my server I"ve disabled the registration
     if not app.config["REGISTRATION"]:
+        flash("Registration is currently disabled", "info")
         return redirect(url_for("frontend.index"))
 
     if g.user is not None and g.user.is_authenticated():
@@ -96,6 +97,7 @@ def reset_password():
 
     # This is only temporary.
     if not app.config["REGISTRATION"]:
+        flash("Password resetting via email is currently disabled", "info")
         return redirect(url_for("frontend.index"))
 
     form = ResetPasswordForm(request.form)
