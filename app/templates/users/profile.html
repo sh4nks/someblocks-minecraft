@@ -16,7 +16,7 @@
             <p><b>About me:</b> {% if user.about_me %}{{ user.about_me }}{% else %}User has not added an description{% endif %}</p>
             <p><b>Joined:</b> {% if user.regdate %}{{ user.regdate|datetime('alphabet') }}{% else %}Chuck Norris{% endif %}
             <p><b>Last seen on:</b> {% if user.lastvisit %}{{ user.lastvisit|datetime('normal') }}{% endif %}</p>
-            {% if user.uid == current_user.uid %}
+            {% if current_user.username == user.username %}
                 <a href="{{ url_for('users.editprofile', username=current_user.username) }}">Edit</a>
             {% endif %}
         </div>

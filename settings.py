@@ -7,8 +7,6 @@ SECRET_KEY = "SecretKeyForSessionSigning"
 
 # SQLAlchemy connection options
 SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(_basedir, "app.db")
-SQLALCHEMY_MIGRATE_REPO = os.path.join(_basedir, "db_repository")
-DATABASE_CONNECT_OPTIONS = {}
 
 # Protection against form post fraud
 CSRF_ENABLED = True
@@ -16,7 +14,7 @@ CSRF_SESSION_KEY = "reallyhardtoguess"
 
 # Auth
 AUTH_USER_MIXINS = []
-AUTH_LOGIN_VIEW = "frontend.login"
+AUTH_LOGIN_VIEW = "auth.login"
 
 # Caching
 CACHE_TYPE = "simple"

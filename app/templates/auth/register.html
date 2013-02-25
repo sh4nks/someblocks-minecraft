@@ -4,7 +4,7 @@
 {% block page_content %}
 {% import "macros/wtf_macros.html" as wtf %}
 <h1>Register</h1>
-<form method="POST" action="{{ url_for('frontend.register') }}" class="form-horizontal">
+<form method="POST" action="{{ url_for('auth.register') }}" class="form-horizontal">
     {{ form.hidden_tag() }}
     {{ wtf.horizontal_field(form.username) }}
     {{ wtf.horizontal_field(form.email) }}
@@ -19,5 +19,5 @@
         </div>
     </div>
 </form>
-<a href="{{ url_for('frontend.login') }}">Login</a>
+<a href="{{ url_for('auth.login') }}">Login</a>
 {% endblock %}

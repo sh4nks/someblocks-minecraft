@@ -1,6 +1,5 @@
 {% extends "admin/admin_base.html" %}
 {% block admin_content %}
-
             <table class="table table-stripped table-hover">
                 <thead>
                     <tr class="success">
@@ -10,29 +9,28 @@
                 <tbody>
                     <tr>
                         <td><b>SomeBlocks Version</b></td>
-                        <td>{{ version[2] }}</td>
+                        <td>someblocks-20130220-git</td>
                         <td><b>Posts</b></td>
-                        <td>{{ version[3] }} Posts</td>
+                        <td>50 Posts</td>
                     </tr>
                     <tr>
                         <td><b>Python Version</b></td>
-                        <td>{{ version[0] }}</td>
+                        <td>{{ py_ver }}</td>
                         <td><b>Comments</b></td>
-                        <td>{{ version[4] }} Comments</td>
+                        <td>1237 Comments</td>
                     </tr>
                     <tr>
                         <td><b>Flask Version</b></td>
-                        <td>{{ version[1] }}</td>
+                        <td>0.9</td>
                         <td><b>User</b></td>
-                        <td>{{ version[5] }} Users</td>
+                        <td>456 Users</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td><b>Group</b></td>
-                        <td>{{ version[6] }} Groups</td>
+                        <td>10 Groups</td>
                     </tr>
-
                 </tbody>
             </table>
 {% endblock %}

@@ -1,5 +1,10 @@
-
 <h1><a href="{{ url_for('blog.post', id=post.pid) }}">{{ post.title }}</a></h1>
-<small style="font-size:13px"> by <a href="{{ url_for('users.profile', username=post.author.username) }}">{{ post.author.username }}</a> on {{ post.date_created|datetime('normal') }}</small>
-<br /><br />
-{{ post.body | markdown}}<br />
+<ul class="blog-info">
+    <li><i class="icon-calendar"></i> {{ post.date_created|datetime('alphabet') }}</li>
+    <li><i class="icon-user"></i> <a href="{{ url_for('users.profile', username=post.author.username) }}">{{ post.author.username }}</a></li>
+    <li><i class="icon-comment"></i> <a href="{{ url_for('blog.post', id=post.pid) }}">Comments ({{ comment_count }})</a></li>
+    {# <li><i class="icon-comment"></i> <a href="{{ url_for('blog.post', id=post.pid) }}">Comments ({{ post.comments.count() }})</a></li> #}
+</ul>
+<div class="blog-content">
+    {{ post.body | markdown}}<br />
+</div>

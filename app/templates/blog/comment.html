@@ -1,0 +1,25 @@
+<hr>
+<h1 name="new_comment">New Comment</h1><br />
+<form action="{{ url_for('blog.new_comment', id=id) }}" method="post" name="new" class="form-horizontal_field">
+    {{ form.hidden_tag() }}
+
+    Content:<br />
+    {{ form.content }}<br />
+
+    <button type="submit" class="btn">Submit!</button>
+</form>
+
+{% if comments %}
+    {% for comment in comments %}
+        <table class="table table-hover">
+            <tr>
+                <td width="70px"><a href="{{ url_for('users.profile', username=comment.author.username) }}">Picture {{ comment.author.username }}</a></td>
+                <td>
+                    <p>{{ comment.author.username }}</p>
+
+                    <p><strong><span id="post{{ comment.cid }}">{{ comment.content }}</span></strong></p>
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+{% endif %}

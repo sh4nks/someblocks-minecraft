@@ -3,7 +3,8 @@
 {% extends "base.html" %}
 {% block page_content %}
 
-{% for post in posts %}
+{#{% for post in posts %}#}
+{% for post, comment_count in posts_and_comments %}
     {% include 'blog/post_layout.html' %}
     {% if not loop.last %}<hr>{% endif %}
 {% endfor %}

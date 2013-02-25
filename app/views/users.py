@@ -10,25 +10,11 @@ from app.models.users import User
 mod = Blueprint("users", __name__, url_prefix="/user")
 
 
-@lm.user_loader
-def load_user(uid):
-    return User.query.get(int(uid))
-
-
-@app.before_request
-def before_request():
-    g.user = current_user
-    if g.user.is_authenticated():
-        g.user.lastvisit = datetime.utcnow()
-        db.session.add(g.user)
-        db.session.commit()
-
-
 @mod.route("/")
 def users():
-    if g.user is not None and g.user.is_authenticated():
+    if current_user is not None and current_user.is_authenticated():
         return redirect(url_for("users.profile", username=current_user))
-    return redirect(url_for("frontend.login"))
+    return redirect(url_for("auth.login"))
 
 
 @mod.route("/<username>")
@@ -37,15 +23,14 @@ def profile(username):
     if user is None:
         flash("User " + username + " not found", "info")
         return redirect(url_for("frontend.index"))
-    return render_template("users/profile.html",
-        user=user)
+    return render_template("users/profile.html", user=user)
 
 
 @mod.route("/<username>/edit", methods=["GET", "POST"])
 @login_required
 def editprofile(username):
-    if username == g.user.username:
-        user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=username).first()
+    if username == current_user.username:
         form = ProfileForm()
         if form.validate_on_submit():
             user.fullname = form.fullname.data
@@ -57,14 +42,12 @@ def editprofile(username):
             db.session.commit()
 
             flash("Your changes have been saved", "success")
-            return redirect(url_for("users.profile", username=user))
+            return redirect(url_for("users.profile", username=user.username))
         else:
-            form.fullname.data = g.user.fullname
-            form.location.data = g.user.location
-            form.sex.data = g.user.sex
-            form.about_me.data = g.user.about_me
+            form.fullname.data = current_user.fullname
+            form.location.data = current_user.location
+            form.sex.data = current_user.sex
+            form.about_me.data = current_user.about_me
     else:
         return redirect(url_for("frontend.index"))
-    return render_template("users/editprofile.html",
-        user=user,
-        form=form)
+    return render_template("users/editprofile.html", user=user, form=form)

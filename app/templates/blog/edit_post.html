@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block page_content %}
-<h1>New Post</h1><br />
+<h1>Edit Post</h1><br />
 <form action="{{ url_for('blog.edit_post', id = id) }}" method="post" name="new" class="form-horizontal_field">
     {{ form.hidden_tag() }}
     Post Title:<br />

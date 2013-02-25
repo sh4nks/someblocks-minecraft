@@ -1,3 +1,7 @@
+__version__ = "0.1-dev"
+
+import logging
+
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
@@ -22,12 +26,15 @@ Misaka(app)
 # Caching
 cache = Cache()
 cache.init_app(app)
+# SQLAlchemy logging
+logging.basicConfig()
+logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
-
-from app.views import admin, users, frontend, blog
+from app.views import admin, users, frontend, auth, blog, admin
 app.register_blueprint(admin.mod)
 app.register_blueprint(users.mod)
 app.register_blueprint(frontend.mod)
+app.register_blueprint(auth.mod)
 app.register_blueprint(blog.mod)
 
 

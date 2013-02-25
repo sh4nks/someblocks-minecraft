@@ -1,11 +1,59 @@
-from flask import Blueprint, render_template, g
-from flask.ext.login import login_required
+from flask import Blueprint, render_template, flash, redirect, url_for, request
+from flask.ext.login import (current_user, confirm_login, login_required,
+                             login_fresh)
+
+from app.decorators import admin_required
+from app.forms.users import LoginForm
+from app.models.blog import Post, Comment
+from app.models.users import User, Group
+from app.helpers import get_python_version, get_flask_version, get_app_version
 
 mod = Blueprint("admin", __name__, url_prefix="/admin")
 
 
-@mod.route("/")
+@mod.route("/", methods=["GET", "POST"])
 @login_required
-def admin_panel():
-    return render_template("admin/overview.html",
-                           user=g.user)
+def login():
+    """
+    Reauthenticates a user
+    """
+    if not current_user.is_admin():
+        flash("You don't have the permissions to access this page", "error")
+        return redirect(url_for("frontend.index"))
+
+    if not login_fresh():
+        form = LoginForm(request.form)
+        if form.validate_on_submit():
+            confirm_login()
+            flash("Reauthenticated")
+            return redirect(url_for("admin.overview"))
+        return render_template("auth/login.html", form=form)
+    return redirect(url_for("admin.overview"))
+
+
+@mod.route("/overview")
+@admin_required
+def overview():
+    version = [get_python_version(), get_flask_version(), get_app_version(),
+               Post.query.count(), Comment.query.count(), User.query.count(),
+               Group.query.count()]
+    return render_template("admin/overview.html", version=version)
+
+
+@mod.route("/manage_posts")
+@admin_required
+def manage_posts():
+    posts = Post.query.order_by(Post.pid.desc())
+    return render_template("admin/manage_posts.html", posts=posts)
+
+
+@mod.route("/manage_users")
+@admin_required
+def manage_users():
+    return render_template("admin/manage_users.html")
+
+
+@mod.route("/manage_groups")
+@admin_required
+def manage_groups():
+    return render_template("admin/manage_groups.html")
