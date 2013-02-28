@@ -6,6 +6,7 @@ from flask.ext.login import login_required, current_user
 from app import db
 from app.models.blog import Post, Comment
 from app.forms.blog import PostForm, CommentForm
+from app.decorators import admin_required
 
 
 mod = Blueprint("blog", __name__, url_prefix="/news")
@@ -41,7 +42,7 @@ def new_post():
             db.session.add(post)
             db.session.commit()
             flash("Your post has been submitted!", "success")
-            return redirect(url_for("blog.news"))
+            return redirect(url_for("blog.post", id=post.pid))
     else:
         flash("You are not allowed to compose a post", "error")
         return redirect(url_for("blog.news"))
@@ -49,51 +50,42 @@ def new_post():
 
 
 @mod.route("/post/<id>/edit", methods=["GET", "POST"])
-@login_required
+@admin_required
 def edit_post(id):
     form = PostForm()
-    if current_user.is_admin():
-        post = Post.query.filter_by(pid=id).first()
+    post = Post.query.filter_by(pid=id).first()
 
-        if form.validate_on_submit():
-            post.title = form.title.data
-            post.body = form.body.data
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.body = form.body.data
 
-            db.session.add(post)
-            db.session.commit()
+        db.session.add(post)
+        db.session.commit()
 
-            flash("Your changes have been saved", "success")
-            return redirect(url_for("blog.news"))
+        flash("Your changes have been saved", "success")
+        return redirect(url_for("blog.post", id=post.pid))
 
-        else:
-            form.title.data = post.title
-            form.body.data = post.body
     else:
-        flash("You are not allowed to edit this post", "error")
-        return redirect(url_for("blog.news"))
+        form.title.data = post.title
+        form.body.data = post.body
+
 
     return render_template("blog/edit_post.html", form=form, id=post.pid)
 
 
 @mod.route("/post/<id>/delete")
-@login_required
+@admin_required
 def delete_post(id):
-    if current_user.is_admin():
-        post = Post.query.filter_by(pid=id).first()
+    post = Post.query.filter_by(pid=id).first()
 
-        db.session.delete(post)
-        db.session.commit()
+    db.session.delete(post)
+    db.session.commit()
 
-        flash("Your post has been deleted", "success")
-        return redirect(url_for("blog.news"))
-    else:
-        flash("You cannot delete someone else's post", "error")
-        return redirect(url_for("blog.news"))
-
-    return render_template("blog/post.html", post=post, pid=id)
+    flash("Your post has been deleted", "success")
+    return redirect(url_for("blog.news"))
 
 
-@mod.route("/post/<id>/comment")
+@mod.route("/post/<id>/comment", methods=["POST"])
 @login_required
 def new_comment(id):
     form = CommentForm()
@@ -107,3 +99,16 @@ def new_comment(id):
         db.session.commit()
 
     return redirect(url_for("blog.post", id=id))
+
+
+@mod.route("/post/<pid>/comment/<cid>/delete")
+@admin_required
+def delete_comment(pid, cid):
+    comment = Comment.query.filter(
+        Post.pid == pid, Comment.cid == cid).first()
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    flash("Your comment has been deleted", "success")
+    return redirect(url_for("blog.post", id = pid))
