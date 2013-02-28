@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db
 
 
@@ -7,7 +9,7 @@ class Post(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     body = db.Column(db.Text)
-    date_created = db.Column(db.DateTime)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
     user_id = db.Column(db.Integer, db.ForeignKey("users.uid"))
     comments = db.relationship("Comment", backref="comments", lazy="dynamic")
 

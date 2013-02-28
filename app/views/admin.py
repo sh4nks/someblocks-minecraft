@@ -5,7 +5,7 @@ from flask.ext.login import (current_user, confirm_login, login_required,
 from app.decorators import admin_required
 from app.forms.users import LoginForm
 from app.models.blog import Post, Comment
-from app.models.users import User, Group
+from app.models.users import User
 from app.helpers import get_python_version, get_flask_version, get_app_version
 
 mod = Blueprint("admin", __name__, url_prefix="/admin")

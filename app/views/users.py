@@ -1,11 +1,10 @@
 from flask import Blueprint, render_template, flash, g, redirect, url_for
 from flask.ext.login import current_user, login_required
 
-from datetime import datetime
-
-from app import app, db, lm
+from app import db
 from app.forms.users import ProfileForm
 from app.models.users import User
+
 
 mod = Blueprint("users", __name__, url_prefix="/user")
 

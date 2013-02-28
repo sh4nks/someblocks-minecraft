@@ -5,11 +5,9 @@
 {% block page_content %}
     {% include 'blog/post_layout.html' %}
 
-    {% if current_user.is_authenticated() and current_user.can_edit_post(post_id=id) %}
-        {% if current_user.can_edit_post(post_id=id) or current_user.is_admin() %}
+    {% if current_user.is_authenticated() and current_user.is_admin() %}
             <i class="icon-trash"></i> <a href="{{ url_for('blog.edit_post', id = post.pid) }}">Edit Post</a> |
             <i class="icon-edit"></i> <a href="{{ url_for('blog.delete_post', id = post.pid) }}">Delete Post</a>
-        {% endif %}
     {% endif %}
 
     {% include 'blog/comment.html' %}

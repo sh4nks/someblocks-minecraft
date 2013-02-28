@@ -2,8 +2,7 @@
 <ul class="blog-info">
     <li><i class="icon-calendar"></i> {{ post.date_created|datetime('alphabet') }}</li>
     <li><i class="icon-user"></i> <a href="{{ url_for('users.profile', username=post.author.username) }}">{{ post.author.username }}</a></li>
-    <li><i class="icon-comment"></i> <a href="{{ url_for('blog.post', id=post.pid) }}">Comments ({{ comment_count }})</a></li>
-    {# <li><i class="icon-comment"></i> <a href="{{ url_for('blog.post', id=post.pid) }}">Comments ({{ post.comments.count() }})</a></li> #}
+    <li><i class="icon-comment"></i> <a href="{{ url_for('blog.post', id=post.pid) }}">Comments ({{ post.comments.count() }})</a></li>
 </ul>
 <div class="blog-content">
     {{ post.body | markdown}}<br />
