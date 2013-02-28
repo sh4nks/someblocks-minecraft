@@ -35,8 +35,7 @@ def login():
 @admin_required
 def overview():
     version = [get_python_version(), get_flask_version(), get_app_version(),
-               Post.query.count(), Comment.query.count(), User.query.count(),
-               Group.query.count()]
+               Post.query.count(), Comment.query.count(), User.query.count()]
     return render_template("admin/overview.html", version=version)
 
 
@@ -50,10 +49,17 @@ def manage_posts():
 @mod.route("/manage_users")
 @admin_required
 def manage_users():
-    return render_template("admin/manage_users.html")
+    users = User.query.all()
+    return render_template("admin/manage_users.html", users=users)
 
 
-@mod.route("/manage_groups")
 @admin_required
-def manage_groups():
-    return render_template("admin/manage_groups.html")
+@mod.route("/user/<username>/delete")
+def delete_user(username):
+    if current_user.username == username:
+        flash("You cannot delete yourself")
+    else:
+        user = User.query.filter_by(username=username).first()
+
+        db.session.delete(user)
+        db.session.commit()

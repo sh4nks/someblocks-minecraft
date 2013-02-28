@@ -3,34 +3,21 @@
             <table class="table table-stripped table-hover">
                 <thead>
                     <tr class="success">
-                        <th colspan="4">Global Statistics</th>
+                        <th>Manage Users</th>
                     </tr>
                 </thead>
                 <tbody>
+                {% for user in users %}
                     <tr>
-                        <td><b>SomeBlocks Version</b></td>
-                        <td>someblocks-20130220-git</td>
-                        <td><b>Posts</b></td>
-                        <td>50 Posts</td>
+                        <td colspan="2">
+                            <b><a href="{{ url_for('users.profile', username=user.username) }}">{{ user.username }}</a></b>
+                        </td>
+                        <td colspan="2">
+                            <i class="icon-trash"></i> <a href="{{ url_for('users.editprofile', username = user.username) }}">Edit User</a>
+                            <i class="icon-edit"></i> <a href="{{ url_for('admin.delete_user', username = user.username) }}">Delete User</a>
+                        </td>
                     </tr>
-                    <tr>
-                        <td><b>Python Version</b></td>
-                        <td>{{ py_ver }}</td>
-                        <td><b>Comments</b></td>
-                        <td>1237 Comments</td>
-                    </tr>
-                    <tr>
-                        <td><b>Flask Version</b></td>
-                        <td>0.9</td>
-                        <td><b>User</b></td>
-                        <td>456 Users</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><b>Group</b></td>
-                        <td>10 Groups</td>
-                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
 {% endblock %}
