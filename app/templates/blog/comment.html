@@ -19,7 +19,9 @@
                     <p>{{ comment.author.username }}</p>
 
                     <p><strong><span id="post{{ comment.cid }}">{{ comment.content }}</span></strong></p>
+                    {% if current_user.is_authenticated() and current_user.is_admin() %}
                     <i class="icon-edit"></i> <a href="{{ url_for('blog.delete_comment', pid=id, cid=comment.cid) }}">Delete Comment</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
