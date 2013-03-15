@@ -10,6 +10,7 @@
             <i class="icon-edit"></i> <a href="{{ url_for('blog.delete_post', id = post.pid) }}">Delete Post</a>
     {% endif %}
 
-    {% include 'blog/comment.html' %}
-
+    {% if comments %}
+        {% include 'blog/comment.html' %}
+    {% endif %}
 {% endblock %}

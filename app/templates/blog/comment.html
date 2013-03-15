@@ -10,20 +10,19 @@
     <button type="submit" class="btn">Submit!</button>
 </form>
 {% endif %}
-{% if comments %}
-        <table class="table table-hover">
-        {% for comment in comments %}
-            <tr>
-                <td width="70px"><a href="{{ url_for('users.profile', username=comment.author.username) }}">Picture {{ comment.author.username }}</a></td>
-                <td>
-                    <p>{{ comment.author.username }}</p>
+<table class="table table-hover">
+{% for comment in comments %}
+    <tr>
+        <td width="70px"><a href="{{ url_for('users.profile', username=comment.author.username) }}">Picture {{ comment.author.username }}</a></td>
+        <td>
+            <p>{{ comment.author.username }}</p>
 
-                    <p><strong><span id="post{{ comment.cid }}">{{ comment.content }}</span></strong></p>
-                    {% if current_user.is_authenticated() and current_user.is_admin() %}
-                    <i class="icon-edit"></i> <a href="{{ url_for('blog.delete_comment', pid=id, cid=comment.cid) }}">Delete Comment</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </table>
-{% endif %}
+            <p><strong><span id="post{{ comment.cid }}">{{ comment.content }}</span></strong></p>
+            {% if current_user.is_authenticated() and current_user.is_admin() %}
+            <i class="icon-edit"></i> <a href="{{ url_for('blog.delete_comment', pid=id, cid=comment.cid) }}">Delete Comment</a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
