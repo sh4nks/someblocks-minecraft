@@ -3,7 +3,7 @@ from datetime import datetime
 from app import db
 
 
-class Pages(db.Model):
+class Page(db.Model):
     __tablename__ = "pages"
 
     pid = db.Column(db.Integer, primary_key=True)

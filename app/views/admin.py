@@ -2,12 +2,13 @@ from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask.ext.login import (current_user, confirm_login, login_required,
                              login_fresh)
 
+from app import db
 from app.decorators import admin_required
 from app.forms.users import LoginForm
-from app.forms.frontend import PageForm
+from app.forms.pages import PageForm
 from app.models.blog import Post, Comment
 from app.models.users import User
-from app.models.frontend import Page
+from app.models.pages import Page
 from app.helpers import get_python_version, get_flask_version, get_app_version
 
 mod = Blueprint("admin", __name__, url_prefix="/admin")
