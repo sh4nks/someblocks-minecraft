@@ -4,8 +4,10 @@ from flask.ext.login import (current_user, confirm_login, login_required,
 
 from app.decorators import admin_required
 from app.forms.users import LoginForm
+from app.forms.frontend import PageForm
 from app.models.blog import Post, Comment
 from app.models.users import User
+from app.models.frontend import Page
 from app.helpers import get_python_version, get_flask_version, get_app_version
 
 mod = Blueprint("admin", __name__, url_prefix="/admin")
@@ -46,6 +48,13 @@ def manage_posts():
     return render_template("admin/manage_posts.html", posts=posts)
 
 
+@mod.route("/manage_pages")
+@admin_required
+def manage_pages():
+    pages = Page.query.all()
+    return render_template("admin/manage_posts.html", pages=pages)
+
+
 @mod.route("/manage_users")
 @admin_required
 def manage_users():
@@ -63,3 +72,21 @@ def delete_user(username):
 
         db.session.delete(user)
         db.session.commit()
+
+
+@admin_required
+@mod.route("/page/new")
+def new_page():
+    pass
+
+
+@admin_required
+@mod.route("/page/<category>/edit")
+def edit_page(category):
+    pass
+
+
+@admin_required
+@mod.route("/page/<category>/delete")
+def delete_page():
+    pass
