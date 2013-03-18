@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash, g, redirect, url_for
+from flask import Blueprint, render_template, flash, redirect, url_for
 from flask.ext.login import current_user, login_required
 
 from app import db
