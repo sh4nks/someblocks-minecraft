@@ -30,7 +30,7 @@ cache.init_app(app)
 logging.basicConfig()
 logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
-from app.views import admin, users, frontend, auth, blog, admin
+from app.views import admin, users, frontend, auth, blog
 app.register_blueprint(admin.mod)
 app.register_blueprint(users.mod)
 app.register_blueprint(frontend.mod)
