@@ -5,5 +5,5 @@
     <li><i class="icon-comment"></i> <a href="{{ url_for('blog.post', id=post.pid) }}">Comments ({{ post.comments.count() }})</a></li>
 </ul>
 <div class="blog-content">
-    {{ post.body | markdown}}<br />
+    {{ post.body | markdown }}<br />
 </div>
