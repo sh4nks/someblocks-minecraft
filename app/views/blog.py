@@ -64,11 +64,9 @@ def edit_post(id):
 
         flash("Your changes have been saved", "success")
         return redirect(url_for("blog.post", id=post.pid))
-
     else:
         form.title.data = post.title
         form.body.data = post.body
-
 
     return render_template("blog/edit_post.html", form=form, id=post.pid)
 
@@ -111,4 +109,4 @@ def delete_comment(pid, cid):
     db.session.commit()
 
     flash("Your comment has been deleted", "success")
-    return redirect(url_for("blog.post", id = pid))
+    return redirect(url_for("blog.post", id=pid))
