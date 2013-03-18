@@ -3,6 +3,7 @@ from flask.ext.login import current_user
 
 from app.helpers import get_minecraft_stats, get_rss_feed
 
+from app.models.pages import Page
 
 mod = Blueprint("frontend", __name__)
 
@@ -22,21 +23,7 @@ def index():
                            maxplayers=full_stats["maxplayers"])
 
 
-@mod.route("/server")
-def server():
-    return render_template("frontend/server.html")
-
-
-@mod.route("/worlds")
-def worlds():
-    return render_template("frontend/worlds.html")
-
-
-@mod.route("/about")
-def about():
-    return render_template("frontend/about.html")
-
-
-@mod.route("/help")
-def help():
-    return render_template("frontend/help.html")
+@mod.route("/<category>")
+def pages(category):
+    page = Page.query.filter_by(category=category).first()
+    return render_template("pages/pages.html", page=page)

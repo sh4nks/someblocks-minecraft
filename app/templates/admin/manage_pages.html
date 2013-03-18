@@ -1,0 +1,23 @@
+{% extends "admin/admin_base.html" %}
+{% block admin_content %}
+            <table class="table table-stripped table-hover">
+                <thead>
+                    <tr class="success">
+                        <th>Manage Pages <small><a href="{{ url_for('admin.new_page') }}">New Page</a><small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for page in pages %}
+                    <tr>
+                        <td colspan="2">
+                            <b><a href="{{ url_for('frontend.pages', category=page.category) }}">{{ page.category }}</a></b>
+                        </td>
+                        <td colspan="2">
+                            <i class="icon-trash"></i> <a href="{{ url_for('admin.edit_page', category=page.category) }}">Edit Post</a>
+                            <i class="icon-edit"></i> <a href="{{ url_for('admin.delete_page', category=page.category) }}">Delete Post</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+{% endblock %}

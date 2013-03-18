@@ -37,9 +37,9 @@ def login():
 @mod.route("/overview")
 @admin_required
 def overview():
-    version = [get_python_version(), get_flask_version(), get_app_version(),
+    info = [get_python_version(), get_flask_version(), get_app_version(),
                Post.query.count(), Comment.query.count(), User.query.count()]
-    return render_template("admin/overview.html", version=version)
+    return render_template("admin/overview.html", info=info)
 
 
 @mod.route("/manage_posts")
@@ -53,7 +53,7 @@ def manage_posts():
 @admin_required
 def manage_pages():
     pages = Page.query.all()
-    return render_template("admin/manage_posts.html", pages=pages)
+    return render_template("admin/manage_pages.html", pages=pages)
 
 
 @mod.route("/manage_users")
@@ -67,7 +67,7 @@ def manage_users():
 @mod.route("/user/<username>/delete")
 def delete_user(username):
     if current_user.username == username:
-        flash("You cannot delete yourself")
+        flash("You cannot delete yourself", "error")
     else:
         user = User.query.filter_by(username=username).first()
 
@@ -76,18 +76,58 @@ def delete_user(username):
 
 
 @admin_required
-@mod.route("/page/new")
+@mod.route("/page/new", methods=["GET", "POST"])
 def new_page():
-    pass
+    form = PageForm(request.form)
+
+    if form.validate_on_submit():
+        page = Page(title=form.title.data, content=form.content.data,
+                    category=form.category.data, user_id=current_user.uid)
+
+        db.session.add(page)
+        db.session.commit()
+
+        flash("Your Page has been submitted!", "success")
+
+    return render_template("admin/new_page.html", form=form)
 
 
 @admin_required
-@mod.route("/page/<category>/edit")
+@mod.route("/page/<category>/edit", methods=["GET", "POST"])
 def edit_page(category):
-    pass
+    page = Page.query.filter_by(category=category).first()
+
+    form = PageForm(request.form)
+
+    if form.validate_on_submit():
+        page.title = form.title.data
+        page.content = form.content.data
+        page.category = form.category.data
+
+        db.session.add(page)
+        db.session.commit()
+
+        flash("Your changes have been saved. Redirecting...", "success")
+        return redirect(url_for("admin.manage_pages"))
+    else:
+        form.title.data = page.title
+        form.content.data = page.content
+        form.category.data = page.category
+
+    return render_template("admin/edit_page.html", page=page, form=form)
 
 
 @admin_required
 @mod.route("/page/<category>/delete")
-def delete_page():
-    pass
+def delete_page(category):
+    page = Page.query.filter_by(category=category).first()
+
+    if page:
+        db.session.delete(page)
+        db.session.commit()
+
+        flash("Your page has been deleted.", "success")
+        return redirect(url_for("admin.manage_pages"))
+    else:
+        flash("I have no page in my database that is named like this.", "error")
+        return redirect(url_for("admin.manage_pages"))

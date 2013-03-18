@@ -10,8 +10,8 @@ class Page(db.Model):
     title = db.Column(db.Text)
     content = db.Column(db.Text)
     date_created = db.Column(db.DateTime, default=datetime.utcnow())
-    category = db.Column(db.String)
+    category = db.Column(db.String, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.uid"))
 
     def __repr__(self):
-        return "Category: %s" % category
+        return "Category: %s" % self.category
