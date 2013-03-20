@@ -6,6 +6,4 @@ Flask-Login
 Flask-Mail
 Flask-Misaka
 Flask-Cache
-alembic
 feedparser
-git+https://github.com/tobiasandtobias/flask-alembic.git#egg=flask-alembic

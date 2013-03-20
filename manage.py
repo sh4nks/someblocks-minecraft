@@ -4,7 +4,6 @@ from datetime import datetime
 from werkzeug import generate_password_hash
 from flask import current_app
 from flask.ext.script import Manager, Server, Shell
-from flask.ext.alembic import ManageMigrations
 
 from app import app, db
 from app.models.users import User
@@ -18,8 +17,6 @@ manager.add_command("runserver", Server("localhost", port=8080))
 def make_shell_context():
     return dict(app=current_app, db=db)
 manager.add_command("shell", Shell(make_context=make_shell_context))
-
-manager.add_command("migrate", ManageMigrations())
 
 
 @manager.command
