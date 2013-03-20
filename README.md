@@ -1,5 +1,5 @@
-Hey!
-============
+# Hey!
+
 
 This app is currently in development
 
@@ -7,26 +7,26 @@ You can view a working example [here](http://someblocks.com/)
 
 Feedback and contributions are highly appreciated!
 
-LICENSE
-============
+#LICENSE
 GPL
 
 
-Installation
-============
+# Installation
 First of all create an virtualenv and install the dependencies as described below
 
 * Create the virtualenv
+
     `virtualenv .venv`
 
 * Activate your virtualenv
+
     `source .venv/bin/activate`
 
 * Install dependencies via `requirements.txt`
+
     `pip install -r requirements.txt`
 
-Dependencies
-------------
+## Dependencies
 * Flask
 
     `pip install flask`
@@ -64,15 +64,13 @@ Dependencies
     `git submodule init` && `git submodule update`
 
 
-Resources used to learn how to build a webapp with Flask
-==============
+# Resources used to learn how to build a webapp with Flask
 * http://flask.pocoo.org/docs/
 * https://github.com/mitsuhiko/flask/wiki/Large-app-how-to
 * http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
 
-How To
-==============
+# How To
 * `python2 manage.py db_create`
 
     This will create the database
@@ -85,8 +83,7 @@ How To
 
     Running the development server
 
-ToDo-List
-==============
+# ToDo-List
 * Caching
 
 * Migrations
