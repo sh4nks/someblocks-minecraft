@@ -22,7 +22,7 @@ First of all create an virtualenv and install the dependencies as described belo
 
     `source .venv/bin/activate`
 
-* Install dependencies via `requirements.txt`
+* Install the dependencies
 
     `pip install -r requirements.txt`
 
