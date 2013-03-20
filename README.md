@@ -3,9 +3,9 @@ Hey!
 
 This app is currently in development
 
-Working example: [someblocks.com](http://someblocks.com/)
+You can view a working example [here](http://someblocks.com/)
 
-Feedback is very appreciated!
+Feedback and contributions are highly appreciated!
 
 LICENSE
 ============
@@ -14,7 +14,16 @@ GPL
 
 Installation
 ============
-First of all make an virtualenv and then you can install the dependencies with `venv_dir/bin/pip install -r requirements.txt`
+First of all create an virtualenv and install the dependencies as described below
+
+* Create the virtualenv
+    `virtualenv .venv`
+
+* Activate your virtualenv
+    `source .venv/bin/activate`
+
+* Install dependencies via `requirements.txt`
+    `pip install -r requirements.txt`
 
 Dependencies
 ------------
@@ -46,14 +55,6 @@ Dependencies
 
     `pip install flask-cache` - Caching support
 
-* Flask-Alembic
-
-    `pip install -e git+https://github.com/tobiasandtobias/flask-alembic.git#egg=flask-alembic`
-
-* alembic
-
-    `pip install alembic`
-
 * feedparser
 
     `pip install feedparser`
@@ -80,22 +81,12 @@ How To
 
     This will create some basic content
 
-* `python2 manage.py db_migrate`
-
-    Everytime you change a model you need to migrate your database
-
 * `python2 manage.py runserver`
 
     Running the development server
 
 ToDo-List
 ==============
-* Recovery E-Mail
+* Caching
 
-* Caching?
-
-* Groups (Admin, Member,...)
-
-* Comments
-
-* Maybe: Integrating a forum (MyBB?)
+* Migrations
