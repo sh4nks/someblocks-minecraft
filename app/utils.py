@@ -5,8 +5,14 @@ import feedparser
 from flask import __version__ as flask_version
 
 from settings import MC_SERVER, MC_PORT, RSS_MCUPDATES
-from app import cache, __version__ as app_version
+from app import cache, app, __version__ as app_version
 from app.libs.mcstatus.minecraft_query import MinecraftQuery
+from app.models.pages import Page
+
+@app.context_processor
+def create_navigation():
+    pages = Page.query.all()
+    return dict(pages=pages)
 
 
 @cache.cached(timeout=60, key_prefix="minecraft_stats")

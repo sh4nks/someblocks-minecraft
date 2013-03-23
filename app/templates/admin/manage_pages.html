@@ -10,11 +10,11 @@
                 {% for page in pages %}
                     <tr>
                         <td colspan="2">
-                            <b><a href="{{ url_for('frontend.pages', category=page.category) }}">{{ page.category }}</a></b>
+                            <b><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.url }}</a></b>
                         </td>
                         <td colspan="2">
-                            <i class="icon-trash"></i> <a href="{{ url_for('admin.edit_page', category=page.category) }}">Edit Post</a>
-                            <i class="icon-edit"></i> <a href="{{ url_for('admin.delete_page', category=page.category) }}">Delete Post</a>
+                            <i class="icon-trash"></i> <a href="{{ url_for('admin.edit_page', url=page.url) }}">Edit Post</a>
+                            <i class="icon-edit"></i> <a href="{{ url_for('admin.delete_page', url=page.url) }}">Delete Post</a>
                         </td>
                     </tr>
                 {% endfor %}

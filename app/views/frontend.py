@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from flask.ext.login import current_user
 
-from app.helpers import get_minecraft_stats, get_rss_feed
+from app.utils import get_minecraft_stats, get_rss_feed
 
 from app.models.pages import Page
 
@@ -23,7 +23,7 @@ def index():
                            maxplayers=full_stats["maxplayers"])
 
 
-@mod.route("/<category>")
-def pages(category):
-    page = Page.query.filter_by(category=category).first()
+@mod.route("/<url>")
+def pages(url):
+    page = Page.query.filter_by(url=url).first()
     return render_template("pages/pages.html", page=page)

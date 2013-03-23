@@ -9,7 +9,7 @@ from app.forms.pages import PageForm
 from app.models.blog import Post, Comment
 from app.models.users import User
 from app.models.pages import Page
-from app.helpers import get_python_version, get_flask_version, get_app_version
+from app.utils import get_python_version, get_flask_version, get_app_version
 
 mod = Blueprint("admin", __name__, url_prefix="/admin")
 
@@ -52,8 +52,10 @@ def manage_posts():
 @mod.route("/manage_pages")
 @admin_required
 def manage_pages():
-    pages = Page.query.all()
-    return render_template("admin/manage_pages.html", pages=pages)
+    # I do not need another query. see helpers.py
+    #pages = Page.query.all()
+    #return render_template("admin/manage_pages.html", pages=pages)
+    return render_template("admin/manage_pages.html")
 
 
 @mod.route("/manage_users")
@@ -82,7 +84,7 @@ def new_page():
 
     if form.validate_on_submit():
         page = Page(title=form.title.data, content=form.content.data,
-                    category=form.category.data, user_id=current_user.uid)
+                    url=form.url.data, user_id=current_user.uid)
 
         db.session.add(page)
         db.session.commit()
@@ -93,16 +95,16 @@ def new_page():
 
 
 @admin_required
-@mod.route("/page/<category>/edit", methods=["GET", "POST"])
-def edit_page(category):
-    page = Page.query.filter_by(category=category).first()
+@mod.route("/page/<url>/edit", methods=["GET", "POST"])
+def edit_page(url):
+    page = Page.query.filter_by(url=url).first()
 
     form = PageForm(request.form)
 
     if form.validate_on_submit():
         page.title = form.title.data
         page.content = form.content.data
-        page.category = form.category.data
+        page.url = form.url.data
 
         db.session.add(page)
         db.session.commit()
@@ -112,15 +114,15 @@ def edit_page(category):
     else:
         form.title.data = page.title
         form.content.data = page.content
-        form.category.data = page.category
+        form.url.data = page.url
 
     return render_template("admin/edit_page.html", page=page, form=form)
 
 
 @admin_required
-@mod.route("/page/<category>/delete")
+@mod.route("/page/<url>/delete")
 def delete_page(category):
-    page = Page.query.filter_by(category=category).first()
+    page = Page.query.filter_by(url=url).first()
 
     if page:
         db.session.delete(page)

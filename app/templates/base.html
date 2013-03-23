@@ -43,9 +43,9 @@
                         <ul class="nav">
                             {{ navlink('frontend.index', 'Home') }}
                             {{ navlink('blog.news', 'News', active=active_page) }}
-
-                            <li><a href="/stats">Statistics</a></li>
-                            <li><a href="/map">Live Map</a></li>
+                            {% for page in pages %}
+                                <li><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.title }}</a></li>
+                            {% endfor %}
                         </ul>
                         <ul class="nav pull-right">
                             <div class="btn-group">
