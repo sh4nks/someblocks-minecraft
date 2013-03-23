@@ -44,7 +44,11 @@
                             {{ navlink('frontend.index', 'Home') }}
                             {{ navlink('blog.news', 'News', active=active_page) }}
                             {% for page in pages %}
-                                <li><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.title }}</a></li>
+                                {%- if url_for('frontend.pages', url=page.url) == request.script_root + request.path -%}
+                                    <li class="active"><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.title }}</a></li>
+                                {%- else -%}
+                                    <li><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.title }}</a></li>
+                                {%- endif -%}
                             {% endfor %}
                         </ul>
                         <ul class="nav pull-right">
