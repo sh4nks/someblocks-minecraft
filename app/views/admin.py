@@ -5,7 +5,7 @@ from flask.ext.login import (current_user, confirm_login, login_required,
 from app import db
 from app.decorators import admin_required
 from app.forms.users import LoginForm
-from app.forms.pages import PageForm
+from app.forms.pages import PageForm, NewPageForm
 from app.models.blog import Post, Comment
 from app.models.users import User
 from app.models.pages import Page
@@ -52,9 +52,6 @@ def manage_posts():
 @mod.route("/manage_pages")
 @admin_required
 def manage_pages():
-    # I do not need another query. see helpers.py
-    #pages = Page.query.all()
-    #return render_template("admin/manage_pages.html", pages=pages)
     return render_template("admin/manage_pages.html")
 
 
@@ -80,11 +77,12 @@ def delete_user(username):
 @admin_required
 @mod.route("/page/new", methods=["GET", "POST"])
 def new_page():
-    form = PageForm(request.form)
+    form = NewPageForm(request.form)
 
     if form.validate_on_submit():
         page = Page(title=form.title.data, content=form.content.data,
-                    url=form.url.data, user_id=current_user.uid)
+                    url=form.url.data, external=form.external.data,
+                    position=form.position.data, user_id=current_user.uid)
 
         db.session.add(page)
         db.session.commit()
@@ -95,18 +93,18 @@ def new_page():
 
 
 @admin_required
-@mod.route("/page/<url>/edit", methods=["GET", "POST"])
-def edit_page(url):
-    page = Page.query.filter_by(url=url).first()
+@mod.route("/page/<int:page_id>/edit", methods=["GET", "POST"])
+def edit_page(page_id):
+    page = Page.query.filter_by(pid=page_id).first()
 
     form = PageForm(request.form)
 
     if form.validate_on_submit():
         page.title = form.title.data
         page.content = form.content.data
-        page.url = form.url.data
+        page.position = form.position.data
 
-        db.session.add(page)
+
         db.session.commit()
 
         flash("Your changes have been saved. Redirecting...", "success")
@@ -114,15 +112,14 @@ def edit_page(url):
     else:
         form.title.data = page.title
         form.content.data = page.content
-        form.url.data = page.url
-
+        form.position.data = page.position
     return render_template("admin/edit_page.html", page=page, form=form)
 
 
 @admin_required
-@mod.route("/page/<url>/delete")
-def delete_page(category):
-    page = Page.query.filter_by(url=url).first()
+@mod.route("/page/<int:page_id>/delete")
+def delete_page(page_id):
+    page = Page.query.filter_by(pid=page_id).first()
 
     if page:
         db.session.delete(page)

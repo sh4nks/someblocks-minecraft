@@ -10,7 +10,7 @@ from flask.ext.login import (login_user, logout_user, current_user,
 from app import app, db, lm
 from app.forms.users import RegisterForm, LoginForm, ResetPasswordForm
 from app.models.users import User
-from app.helpers import generate_random_pass
+from app.utils import generate_random_pass
 from app.emails import send_new_password
 
 

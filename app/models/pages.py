@@ -11,6 +11,8 @@ class Page(db.Model):
     content = db.Column(db.Text)
     date_created = db.Column(db.DateTime, default=datetime.utcnow())
     url = db.Column(db.String, unique=True)
+    external = db.Column(db.Boolean, default=False)
+    position = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey("users.uid"))
 
     def __repr__(self):

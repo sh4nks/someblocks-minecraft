@@ -23,7 +23,7 @@ def index():
                            maxplayers=full_stats["maxplayers"])
 
 
-@mod.route("/<url>")
+@mod.route("/p/<url>")
 def pages(url):
     page = Page.query.filter_by(url=url).first()
     return render_template("pages/pages.html", page=page)

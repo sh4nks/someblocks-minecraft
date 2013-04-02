@@ -9,9 +9,10 @@ from app import cache, app, __version__ as app_version
 from app.libs.mcstatus.minecraft_query import MinecraftQuery
 from app.models.pages import Page
 
+
 @app.context_processor
 def create_navigation():
-    pages = Page.query.all()
+    pages = Page.query.order_by(Page.position.asc())
     return dict(pages=pages)
 
 
