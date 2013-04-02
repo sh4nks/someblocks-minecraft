@@ -42,7 +42,7 @@ def generate_random_pass(length=8):
 
 
 def get_python_version():
-    return "%s.%s" % (sys.version_info.major, sys.version_info.minor)
+    return "%s.%s" % (sys.version_info[0], sys.version_info[1])
 
 
 def get_flask_version():
