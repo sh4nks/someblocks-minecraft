@@ -1,16 +1,25 @@
 {% extends "admin/admin_base.html" %}
 {% block admin_content %}
-<form action="{{ url_for('admin.new_page') }}" method="post" name="new" class="form-horizontal_field">
+<form action="{{ url_for('admin.new_page') }}" method="post" name="new">
+    <fieldset>
+    {%- from 'macros/wtf_macros.html' import form_field -%}
+
     {{ form.hidden_tag() }}
-    Page Title<br />
-    {{ form.title }}<br />
 
-    Page Category (URL - e.q. about or about_us)<br />
-    {{ form.url }}<br />
+    <legend>New Page</legend>
 
-    Content<br />
-    {{ form.content(style="width:820px;height:400px;")}}<br />
+    {{ form_field(form.title) }}
+
+    {{ form_field(form.url, placeholder="e.q. about or about_us") }}
+
+    {{ form_field(form.external) }}
+
+    {{ form_field(form.position) }}
+
+    {{ form_field(form.content, rows="20", class="span10") }}
+
 
     <button type="submit" class="btn">Submit!</button>
+    </fieldset>
 </form>
 {% endblock %}

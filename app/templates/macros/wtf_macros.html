@@ -56,3 +56,53 @@
     {%- endfor %}
 {%- endif %}
 {%- endmacro %}
+
+
+{# See https://gist.github.com/ligthyear/1284631 #}
+{%- macro form_field_label(field) -%}
+    <label for="{{ field.id }}">{{ field.label.text }}</label>
+{% endmacro %}
+
+{%- macro form_field_description(field) -%}
+    {% if field.description %}
+        <span class="help-block">{{ field.description }}</span>
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro form_field_errors(field) -%}
+    {% if field.errors %}
+        {%- for error in field.errors -%}
+        <span class="label label-important">{{ error }}</span>
+        {%- endfor -%}
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro form_field_boolean(field, inline=False) -%}
+    <label class="checkbox {%- if inline -%}inline{%- endif -%}">
+            {{ field(**kwargs) }}
+            {{ field.label.text }}
+            {{ form_field_description(field) }}
+            {{ form_field_errors(field) }}
+    </label>
+{%- endmacro -%}
+
+{%- macro form_field(field) -%}
+    {% if field.type == 'HiddenField' %}
+        {{ field() }}
+    {% else %}
+        {% if field.type == 'BooleanField' %}
+            {{ form_field_boolean(field, **kwargs) }}
+        {% else%}
+            {{ form_field_label(field) }}
+                    <div class="input" id="{{field.id}}-div">
+            {% if field.type == 'RadioField' %}
+                {{ field(class='radio', **kwargs) }}
+            {% else %}
+                {{ field(**kwargs) }}
+            {% endif %}
+            {{ form_field_description(field) }}
+            {{ form_field_errors(field) }}
+                    </div>
+        {% endif %}
+    {% endif %}
+{%- endmacro -%}

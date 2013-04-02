@@ -2,30 +2,24 @@
 
 {% extends "base.html" %}
 {% block page_content %}
-<h1>Edit your Profile</h1>
-<form action="{{ url_for('users.editprofile', username=current_user.username) }}" method="post" name="edit" class="form-horizontal_field well">
+<form action="{{ url_for('users.editprofile', username=current_user.username) }}" method="post" name="edit">
+    <fieldset>
+
+    {%- from 'macros/wtf_macros.html' import form_field -%}
     {{ form.hidden_tag() }}
-    <table>
-        <tr>
-            <td>Your Name:</td>
-            <td>{{ form.fullname }}</td>
-        </tr>
-        <tr>
-            <td>Location:</td>
-            <td>{{ form.location }}</td>
-        </tr>
-        <tr>
-            <td>Sex:</td>
-            <td>{{ form.sex }}</td>
-        </tr>
-        <tr>
-            <td>About Me:</td>
-            <td>{{ form.about_me(cols = 32, rows = 4) }}</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><button type="submit" class="btn">Save changes</button></td>
-        </tr>
-    </table>
+
+    <legend>Edit your Profile</legend>
+
+    {{ form_field(form.fullname) }}
+
+    {{ form_field(form.location) }}
+
+    {{ form_field(form.sex) }}
+
+    {{ form_field(form.about_me, rows="20", class="span10", placeholder="**With markdown support!**") }}
+
+    <button type="submit" class="btn">Save!</button>
+
+    </fieldset>
 </form>
 {% endblock %}

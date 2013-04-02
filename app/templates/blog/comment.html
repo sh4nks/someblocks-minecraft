@@ -1,28 +1,34 @@
+{%- if current_user.is_authenticated() -%}
 <hr>
-{% if current_user.is_authenticated() %}
-<h1 name="new_comment">New Comment</h1><br />
 <form action="{{ url_for('blog.new_comment', id=id) }}" method="post" name="new" class="form-horizontal_field">
+    <fieldset>
+    {%- from 'macros/wtf_macros.html' import form_field -%}
     {{ form.hidden_tag() }}
 
-    Content:<br />
-    {{ form.content(class="container", rows="5") }} <br />
+    <legend>New Comment</legend>
+
+    {{ form_field(form.content, rows="5", class="container") }}
 
     <button type="submit" class="btn">Submit!</button>
+
+    </fieldset>
 </form>
-{% endif %}
-<table class="table table-hover">
-{% for comment in comments %}
-    <tr>
-        <td width="70px"><a href="{{ url_for('users.profile', username=comment.author.username) }}">Picture {{ comment.author.username }}</a></td>
-        <td>
-            <p>{{ comment.author.username }}</p>
+{%- endif -%}
 
-            <p><strong><span id="post{{ comment.cid }}">{{ comment.content }}</span></strong></p>
-            {% if current_user.is_authenticated() and current_user.is_admin() %}
-            <i class="icon-edit"></i> <a href="{{ url_for('blog.delete_comment', pid=id, cid=comment.cid) }}">Delete Comment</a>
-            {% endif %}
-        </td>
-    </tr>
-{% endfor %}
-</table>
+{%- if comments -%}
+    <table class="table table-hover">
+    {%- for comment in comments -%}
+        <tr>
+            <td width="70px"><a href="{{ url_for('users.profile', username=comment.author.username) }}">No Profile Picture</a></td>
+            <td>
+                <p>{{ comment.author.username }}</p>
 
+                <p><strong><span id="post{{ comment.cid }}">{{ comment.content | markdown }}</span></strong></p>
+                {%- if current_user.is_authenticated() and current_user.is_admin() -%}
+                <i class="icon-edit"></i> <a href="{{ url_for('blog.delete_comment', pid=id, cid=comment.cid) }}">Delete Comment</a>
+                {%- endif -%}
+            </td>
+        </tr>
+    {%- endfor -%}
+    </table>
+{%- endif -%}

@@ -43,13 +43,19 @@
                         <ul class="nav">
                             {{ navlink('frontend.index', 'Home') }}
                             {{ navlink('blog.news', 'News', active=active_page) }}
-                            {% for page in pages %}
-                                {%- if url_for('frontend.pages', url=page.url) == request.script_root + request.path -%}
-                                    <li class="active"><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.title }}</a></li>
+                            {%- for page in pages -%}
+                                {%- if not page.external -%}
+
+                                    {%- if url_for('frontend.pages', url=page.url) == request.script_root + request.path -%}
+                                        <li class="active"><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.title }}</a></li>
+                                    {%- else -%}
+                                        <li><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.title }}</a></li>
+                                    {%- endif -%}
+
                                 {%- else -%}
-                                    <li><a href="{{ url_for('frontend.pages', url=page.url) }}">{{ page.title }}</a></li>
+                                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
                                 {%- endif -%}
-                            {% endfor %}
+                            {%- endfor -%}
                         </ul>
                         <ul class="nav pull-right">
                             <div class="btn-group">
