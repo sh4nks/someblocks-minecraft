@@ -13,6 +13,8 @@
 
     </fieldset>
 </form>
+{%- else -%}
+<a href="{{ url_for('auth.login') }}">Login</a> or <a href="{{ url_for('auth.register') }}">Register</a> to comment on this post.
 {%- endif -%}
 
 {%- if comments -%}
