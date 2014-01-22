@@ -41,9 +41,3 @@ MC_PORT = 25565
 
 # I have disabled the registration on my server (this is only temporary)
 REGISTRATION = True
-
-ADMIN_URL = "/admin"
-USER_URL = "/user"
-FRONTEND_URL = ""
-BLOG_URL = "/blog"
-AUTH_URL = "/auth"

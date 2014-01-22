@@ -5,9 +5,13 @@
     {%- from 'macros/wtf_macros.html' import form_field -%}
     {{ form.hidden_tag() }}
 
-    <legend>New Page</legend>
+    <legend>Edit Page</legend>
 
     {{ form_field(form.title) }}
+
+    {{ form_field(form.url, placeholder="e.q. about or about_us") }}
+
+    {{ form_field(form.external) }}
 
     {{ form_field(form.position) }}
 

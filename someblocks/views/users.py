@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask.ext.login import current_user, login_required
 
-from app import db
-from app.forms.users import ProfileForm
-from app.models.users import User
+from ..extensions import db
+from ..forms.users import ProfileForm
+from ..models.users import User
 
 
 mod = Blueprint("users", __name__, url_prefix="/user")

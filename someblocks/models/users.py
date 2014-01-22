@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from app import db
-from app.models.blog import Post
+from ..extensions import db
 
 
 class User(db.Model):

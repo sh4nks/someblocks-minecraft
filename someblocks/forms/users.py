@@ -1,8 +1,9 @@
-from flask.ext.wtf import (Form, TextField, PasswordField, BooleanField,
-                           RecaptchaField, Required, Email, EqualTo, Length,
-                           TextAreaField, SelectField, ValidationError, regexp)
-
-from app.models.users import User
+from flask.ext.wtf import Form, RecaptchaField
+from wtforms import (TextField, PasswordField, BooleanField, TextAreaField,
+                     SelectField)
+from wtforms.validators import (Required, Email, EqualTo, Length, regexp,
+                                ValidationError)
+from ..models.users import User
 
 
 is_username = regexp(r"^[\w.+-]+$",
@@ -33,12 +34,9 @@ class RegisterForm(Form):
 
     confirm_password = PasswordField("Confirm Password", [
         Required(message="Confirm Password required"),
-        EqualTo("password", message="Passwords do not match")
-        ])
+        EqualTo("password", message="Passwords do not match")])
 
     accept_tos = BooleanField("Accept Terms of Service", default=True)
-
-    #recaptcha = RecaptchaField()
 
     def validate_username(self, field):
         user = User.query.filter_by(username=field.data).first()
@@ -49,6 +47,10 @@ class RegisterForm(Form):
         email = User.query.filter_by(email=field.data).first()
         if email:
             raise ValidationError("This email is taken")
+
+
+class RegisterRecaptchaForm(RegisterForm):
+    recaptcha = RecaptchaField("Captcha")
 
 
 class ResetPasswordForm(Form):

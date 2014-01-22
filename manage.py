@@ -5,11 +5,12 @@ from werkzeug import generate_password_hash
 from flask import current_app
 from flask.ext.script import Manager, Server, Shell
 
-from app import app, db
-from app.models.users import User
-from app.models.blog import Post
+from someblocks import create_app
+from someblocks.extensions import db
+from someblocks.models.users import User
+from someblocks.models.blog import Post
 
-
+app = create_app()
 manager = Manager(app)
 manager.add_command("runserver", Server("localhost", port=8080))
 
@@ -20,14 +21,16 @@ manager.add_command("shell", Shell(make_context=make_shell_context))
 
 
 @manager.command
-def db_create():
+def initdb():
     """ Creates the database """
     db.create_all()
 
 
 @manager.command
-def db_content():
-    """ Adds sample content """
+def initall():
+    """ Creates the database and adds some sample content """
+
+    db.create_all()
 
     title_data = "Markdown Example"
 

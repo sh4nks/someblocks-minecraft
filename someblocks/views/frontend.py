@@ -1,9 +1,8 @@
 from flask import Blueprint, render_template
 from flask.ext.login import current_user
 
-from app.utils import get_minecraft_stats, get_rss_feed
-
-from app.models.pages import Page
+from ..utils import get_minecraft_stats, get_rss_feed
+from ..models.pages import Page
 
 mod = Blueprint("frontend", __name__)
 
@@ -23,7 +22,7 @@ def index():
                            maxplayers=full_stats["maxplayers"])
 
 
-@mod.route("/p/<url>")
+@mod.route("/<path:url>")
 def pages(url):
     page = Page.query.filter_by(url=url).first()
     return render_template("pages/pages.html", page=page)

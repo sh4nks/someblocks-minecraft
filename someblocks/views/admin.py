@@ -2,14 +2,14 @@ from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask.ext.login import (current_user, confirm_login, login_required,
                              login_fresh)
 
-from app import db
-from app.decorators import admin_required
-from app.forms.users import LoginForm
-from app.forms.pages import PageForm, NewPageForm
-from app.models.blog import Post, Comment
-from app.models.users import User
-from app.models.pages import Page
-from app.utils import get_python_version, get_flask_version, get_app_version
+from ..extensions import db
+from ..decorators import admin_required
+from ..forms.users import LoginForm
+from ..forms.pages import PageForm
+from ..models.blog import Post, Comment
+from ..models.users import User
+from ..models.pages import Page
+from ..utils import get_python_version, get_flask_version, get_app_version
 
 mod = Blueprint("admin", __name__, url_prefix="/admin")
 
@@ -38,7 +38,7 @@ def login():
 @admin_required
 def overview():
     info = [get_python_version(), get_flask_version(), get_app_version(),
-               Post.query.count(), Comment.query.count(), User.query.count()]
+            Post.query.count(), Comment.query.count(), User.query.count()]
     return render_template("admin/overview.html", info=info)
 
 
@@ -77,7 +77,7 @@ def delete_user(username):
 @admin_required
 @mod.route("/page/new", methods=["GET", "POST"])
 def new_page():
-    form = NewPageForm(request.form)
+    form = PageForm(request.form)
 
     if form.validate_on_submit():
         page = Page(title=form.title.data, content=form.content.data,
@@ -103,7 +103,8 @@ def edit_page(page_id):
         page.title = form.title.data
         page.content = form.content.data
         page.position = form.position.data
-
+        page.url = form.url.data
+        page.external = form.external.data
 
         db.session.commit()
 
@@ -113,6 +114,9 @@ def edit_page(page_id):
         form.title.data = page.title
         form.content.data = page.content
         form.position.data = page.position
+        form.url.data = page.url
+        form.external.data = page.external
+
     return render_template("admin/edit_page.html", page=page, form=form)
 
 

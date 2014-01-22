@@ -1,15 +1,16 @@
 from flask import render_template
 from flask.ext.mail import Message
-from app import mail
-from decorators import async
+from .extensions import mail
+from .decorators import async
 
 
 def send_new_password(user, pw):
-    send_email(subject="Password Reset", recipients=[user.email],
+    send_email(
+        subject="Password Reset", recipients=[user.email],
         text_body=render_template("email/reset_password.txt",
-            user=user, password=pw),
+                                  user=user, password=pw),
         html_body=render_template("email/reset_password.html",
-            user=user, password=pw)
+                                  user=user, password=pw)
     )
 
 

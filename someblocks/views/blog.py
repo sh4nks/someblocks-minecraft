@@ -3,10 +3,10 @@ from datetime import datetime
 from flask import Blueprint, render_template, redirect, flash, url_for
 from flask.ext.login import login_required, current_user
 
-from app import db
-from app.models.blog import Post, Comment
-from app.forms.blog import PostForm, CommentForm
-from app.decorators import admin_required
+from ..extensions import db
+from ..models.blog import Post, Comment
+from ..forms.blog import PostForm, CommentForm
+from ..decorators import admin_required
 
 
 mod = Blueprint("blog", __name__, url_prefix="/news")
@@ -25,7 +25,7 @@ def post(id):
     post = Post.query.filter_by(pid=id).first()
     comment = Comment.query.filter_by(post_id=id).all()
     return render_template("blog/post.html", post=post, id=post.pid, form=form,
-                            comments=comment)
+                           comments=comment)
 
 
 @mod.route("/post/new", methods=["GET", "POST"])
@@ -37,7 +37,8 @@ def new_post():
         if form.validate_on_submit():
             post = Post(
                 title=form.title.data, body=form.body.data,
-                    date_created=datetime.utcnow(), user_id=current_user.uid)
+                date_created=datetime.utcnow(), user_id=current_user.uid
+            )
 
             db.session.add(post)
             db.session.commit()
@@ -49,7 +50,7 @@ def new_post():
     return render_template("blog/new_post.html", form=form)
 
 
-@mod.route("/post/<id>/edit", methods=["GET", "POST"])
+@mod.route("/post/<int:id>/edit", methods=["GET", "POST"])
 @admin_required
 def edit_post(id):
     form = PostForm()
@@ -71,7 +72,7 @@ def edit_post(id):
     return render_template("blog/edit_post.html", form=form, id=post.pid)
 
 
-@mod.route("/post/<id>/delete")
+@mod.route("/post/<int:id>/delete")
 @admin_required
 def delete_post(id):
     post = Post.query.filter_by(pid=id).first()
@@ -83,7 +84,7 @@ def delete_post(id):
     return redirect(url_for("blog.news"))
 
 
-@mod.route("/post/<id>/comment", methods=["POST"])
+@mod.route("/post/<int:id>/comment", methods=["POST"])
 @login_required
 def new_comment(id):
     form = CommentForm()
@@ -99,7 +100,7 @@ def new_comment(id):
     return redirect(url_for("blog.post", id=id))
 
 
-@mod.route("/post/<pid>/comment/<cid>/delete")
+@mod.route("/post/<int:pid>/comment/<int:cid>/delete")
 @admin_required
 def delete_comment(pid, cid):
     comment = Comment.query.filter(

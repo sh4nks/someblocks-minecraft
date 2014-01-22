@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from app import db
+from ..extensions import db
 
 
 class Page(db.Model):

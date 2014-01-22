@@ -2,24 +2,17 @@ import random
 import sys
 import feedparser
 
-from flask import __version__ as flask_version
+from flask import current_app, __version__ as flask_version
 
-from settings import MC_SERVER, MC_PORT, RSS_MCUPDATES
-from app import cache, app, __version__ as app_version
-from app.libs.mcstatus.minecraft_query import MinecraftQuery
-from app.models.pages import Page
-
-
-@app.context_processor
-def create_navigation():
-    pages = Page.query.order_by(Page.position.asc())
-    return dict(pages=pages)
+from .extensions import cache
+from .libs.mcstatus.minecraft_query import MinecraftQuery
 
 
 @cache.cached(timeout=60, key_prefix="minecraft_stats")
 def get_minecraft_stats():
     try:
-        query = MinecraftQuery(MC_SERVER, MC_PORT, 1, 1)
+        query = MinecraftQuery(current_app.config["MC_SERVER"],
+                               current_app.config["MC_PORT"], 1, 1)
         stats = query.get_rules()
     except:
         stats = {"hostip": None, "players": None, "numplayers": None,
@@ -30,11 +23,19 @@ def get_minecraft_stats():
 @cache.cached(timeout=300, key_prefix="rss_feed")
 def get_rss_feed():
     try:
-        d = feedparser.parse(RSS_MCUPDATES)
+        d = feedparser.parse(current_app.config["RSS_MCUPDATES"])
         rss = [[d.entries[i].title, d.entries[i].link] for i in range(5)]
     except:
         rss = None
     return rss
+
+
+def format_date(value, dateformat='normal'):
+    if dateformat == 'normal':
+        dateformat = '%d.%m.%Y @ %H:%M'
+    elif dateformat == 'alphabet':
+        dateformat = '%b %d %Y'
+    return value.strftime(dateformat)
 
 
 def generate_random_pass(length=8):
@@ -50,4 +51,4 @@ def get_flask_version():
 
 
 def get_app_version():
-    return app_version
+    return "0.2"  # need to change that
