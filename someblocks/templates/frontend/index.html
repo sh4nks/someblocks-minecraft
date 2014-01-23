@@ -36,7 +36,7 @@
         <p>
         {% if players %}
             {% for i in range(0, players|count) %}
-                <a href="/stats/single_player.php?p={{ player[i] }}"><b>{{ players[i] }}</b></a>{% if not loop.last %},{% endif %}
+                <a href="/stats/single_player.php?p={{ players[i] }}"><b>{{ players[i] }}</b></a>{% if not loop.last %},{% endif %}
             {% endfor %}
         {% elif not hostip %}
                 The server is offline.
