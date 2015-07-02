@@ -1,0 +1,226 @@
+{% extends "main/layout.html" %}
+
+{% block css %}
+    {{ super() }}
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+<!-- Page Heading/Breadcrumbs -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Projects
+            <small>and Services</small>
+        </h1>
+    </div>
+</div>
+<!-- /.row -->
+<div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+        <div class="panel-heading">
+            <span class="fa-stack fa-5x">
+                  <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fa fa-gamepad fa-stack-1x fa-inverse"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <h4>Gaming Platform</h4>
+            <p>We also host a few Servers such as Minecraft for our friends. </p>
+            <a href="http://gaming.someblocks.com" class="btn btn-primary">Visit Website</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+        <div class="panel-heading">
+            <span class="fa-stack fa-5x">
+                  <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fa fa-comments-o fa-stack-1x fa-inverse"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <h4>FlaskBB</h4>
+            <p>FlaskBB is a lightweight forum software written in Python.</p>
+            <a href="http://flaskbb.org" class="btn btn-primary">Visit Website</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+        <div class="panel-heading">
+            <span class="fa-stack fa-5x">
+                  <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fa fa-comment fa-stack-1x fa-inverse"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <h4>Dary</h4>
+            <p>Dary is a blogging and sharing platform for everybody.</p>
+            <a href="http://dary.info" class="btn btn-primary">Visit Website</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+        <div class="panel-heading">
+            <span class="fa-stack fa-5x">
+                  <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <h4>Community</h4>
+            <p>Coming soon!</p>
+            <a href="http://community.someblocks.com" class="btn btn-primary">Visit Website</a>
+        </div>
+    </div>
+</div>
+
+<!-- Project List -->
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">Full Project List
+        <small>Also the non mention worthy projects</small>
+        </h2>
+        <p>A list with all projects and libraries we are maintaining and developing.</p>
+    </div>
+
+    <div class="col-lg-12">
+        <h4 class="page-header" style="margin-top: 20px">
+            Java <small>All projects in Java</small>
+        </h4>
+    </div>
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-comment fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading project-title"><a href="https://github.com/FrontSide/Dary-The-Blog">FrontSide / Dary</a></h4>
+                <p>Dary is a blogging and sharing platform for everybody.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-database fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading project-title"><a href="https://github.com/FrontSide/Arignee">FrontSide / Arignee</a></h4>
+                <p>A Web-Application for automated evaluations of e-commerce websites.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <h4 class="page-header" style="margin-top: 20px">
+            Python <small>All projects in Python</small>
+        </h4>
+    </div>
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-comments-o fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading project-title"><a href="https://github.com/sh4nks/flaskbb">sh4nks / flaskbb</a></h4>
+                <p>A forum software written in python using the micro framework Flask.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading project-title"><a href="https://github.com/sh4nks/flask-plugins">sh4nks / flask-plugins</a></h4>
+                <p>Extend your Flask application with Plugins and Hooks.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-paper-plane fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading project-title"><a href="https://github.com/sh4nks/tardigrade">sh4nks / tardigrade</a></h4>
+                <p>Tardigrade is a tiny content-management environment.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-chain-broken fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading project-title"><a href="https://github.com/FrontSide/Sizun">FrontSide / Sizun</a></h4>
+                <p>A Software Quality Inspection and Assessment Framework written in Python.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <h4 class="page-header" style="margin-top: 20px">
+            Misc <small>Various other projects</small>
+        </h4>
+    </div>
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-dot-circle-o fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading project-title"><a href="https://github.com/sh4nks/dotfiles">sh4nks / dotfiles</a></h4>
+                <p>personal dotfiles.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-car fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading project-title"><a href="https://github.com/sh4nks/sloth_racing">sh4nks / sloth_racing</a></h4>
+                <p>A sloth racing game written in JS and HTML.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.row -->
+<hr>
+{% endblock %}

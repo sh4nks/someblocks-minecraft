@@ -1,0 +1,113 @@
+{% extends "main/layout.html" %}
+
+{% block content %}
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="{{ url_for('static', filename='imgs/flaskbb.png') }}">
+        </div>
+        <!-- End Item -->
+        <div class="item">
+            <img src="{{ url_for('static', filename='imgs/dary.png') }}">
+        </div>
+        <!-- End Item -->
+        <div class="item">
+            <img src="{{ url_for('static', filename='imgs/minecraft.png') }}">
+        </div>
+        <!-- End Item -->
+        <div class="item">
+            <img src="{{ url_for('static', filename='imgs/coming_soon.png') }}">
+            <div class="carousel-caption">
+                <h3>Next Project?</h3>
+                <p>
+                    Unfortunately, there is no public 4th project right now.
+                    But don't worry, we are always working on new projects -
+                    and if one is worth to be made public it will stand here.
+                </p>
+            </div>
+        </div>
+        <!-- End Item -->
+    </div>
+    <!-- End Carousel Inner -->
+    <ul class="nav nav-pills nav-justified">
+        <li data-target="#myCarousel" data-slide-to="0" class="active">
+            <a href="#">FlaskBB <small>A lightweight forum software in Python</small></a>
+        </li>
+        <li data-target="#myCarousel" data-slide-to="1">
+            <a href="#">Dary <small>A blogging software written in Java</small></a>
+        </li>
+        <li data-target="#myCarousel" data-slide-to="2">
+            <a href="#">Minecraft<small>Minecraft server from friends for friends</small></a>
+        </li>
+        <li data-target="#myCarousel" data-slide-to="3">
+            <a href="#">Coming Soon&#0153; <small>to be continued</small></a>
+        </li>
+    </ul>
+</div>
+</div>
+
+<!-- Page Content -->
+<div class="container">
+
+<!-- Marketing Icons Section -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Welcome to SomeBlocks <i class="fa fa-code"></i>
+        </h1>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><i class="fa fa-fw fa-check"></i> Free &amp; Open Source</h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    We love Open Source Software and so should you!
+                    You can find a list of our open sourced projects
+                    on the button below. We use a lot of open source
+                    software in our projects and also for developing
+                    them.
+                </p>
+                <a href="{{ url_for('main.projects') }}" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><i class="fa fa-fw fa-gift"></i> About</h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    We are a small team of friends who enjoy programming
+                    and sometimes we also like game (looking at you Minecraft).
+                    So we thought it would be a cool idea to have a hub where
+                    all our projects can be found.
+                </p>
+                <a href="{{ url_for('main.about') }}" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><i class="fa fa-fw fa-compass"></i> Projects</h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    Our projects are written in various different languages.
+                    Sometimes just because we like to explore new things or
+                    to just to get our idea implemented with one of the languages
+                    we like to code in.
+                </p>
+                <a href="{{ url_for('main.projects') }}" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+<hr>
+{% endblock %}

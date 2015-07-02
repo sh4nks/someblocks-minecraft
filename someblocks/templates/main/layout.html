@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='css/flat-ui.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/someblocks.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block navigation %}
+{% from "macros.html" import topnav %}
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">SomeBlocks <i class="fa fa-code"></i> Team</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                {{ topnav(endpoint='main.index', name='Home') }}
+                {{ topnav(endpoint='main.projects', name='Projects') }}
+                {{ topnav(endpoint='main.about', name='About') }}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted pull-left">&copy; 2015 - <a href="http://someblocks.com">SomeBlocks.com</a></p>
+        <p class="text-muted pull-right"><span style="color: #48C9B0; font-size: 1.25em"><i class="fa fa-code"></i></span> with <span style="color: #C23A23; font-size: 1.25em">&hearts;</span> in Austria.</p>
+    </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ url_for('static', filename='js/video.js') }}"></script>
+<script src="{{ url_for('static', filename='js/flat-ui.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/stackblur.js') }}"></script>
+
+<!-- Script to Activate the Carousel -->
+<script>
+$(document).ready( function() {
+    $('#myCarousel').carousel({
+        interval:   4000
+    });
+
+    var clickEvent = false;
+    $('#myCarousel').on('click', '.nav a', function() {
+            clickEvent = true;
+            $('.nav li').removeClass('active');
+            $(this).parent().addClass('active');
+    }).on('slid.bs.carousel', function(e) {
+        if(!clickEvent) {
+            var count = $('.nav').children().length -1;
+            var current = $('.nav li.active');
+            current.removeClass('active').next().addClass('active');
+            var id = parseInt(current.data('slide-to'));
+            if(count == id) {
+                $('.nav li').first().addClass('active');
+            }
+        }
+        clickEvent = false;
+    });
+});
+</script>
+{% endblock %}

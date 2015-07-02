@@ -1,0 +1,82 @@
+{% extends "gaming/layout.html" %}
+{% block content %}
+<!-- Heading Row -->
+<div class="row">
+    <div class="col-md-5">
+        <img class="img-responsive img-rounded" src="{{ url_for('static', filename='imgs/floating_islands.jpg') }}" alt="">
+    </div>
+    <!-- /.col-md-8 -->
+    <div class="col-md-7">
+        <h1>Minecraft</h1>
+        <p>
+            On our server, we offer two different game worlds. The creative world named "Asgard" and our survival world "Midgard".
+            This server is hosted for friends from friends. We are just a small community who actually really like to play Minecraft from time to time.
+        </p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('gaming.map') }}">Live Map</a>
+    </div>
+    <!-- /.col-md-4 -->
+</div>
+<!-- /.row -->
+
+<hr>
+
+<!-- 
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-success">
+            <strong>Announcements</strong>
+            <a class="news-item" href="#">SomeBlocks restructured with a new Design</a>
+        </div>
+    </div>
+</div>
+-->
+
+<!-- Content Row -->
+<div class="row">
+    <div class="col-md-4">
+        <h2>Server Status</h2>
+
+        <div class="server-status">
+            <div class="server">
+                <strong>Minecraft Survival Server</strong>
+                <div class="status">
+                    <span class="badge badge-info">someblocks.com</span> <span class="badge badge-success">online</span> <span class="badge">0/20</span>
+                </div>
+            </div>
+            <div class="server">
+                <strong>Minecraft Creative Server</strong>
+                <div class="status">
+                    <span class="badge badge-info">someblocks.com:25566</span> <span class="badge badge-danger">offline</span> <span class="badge">0/20</span>
+                </div>
+            </div>
+
+            <div class="server">
+                <strong>TeamSpeak 3 Server</strong>
+                <div class="status">
+                    <span class="badge badge-info">someblocks.com</span> <span class="badge badge-warning">n/a</span> <span class="badge">0/20</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-4 -->
+    <div class="col-md-4">
+        <h2>Online Players</h2>
+        <p>No players online.</p>
+    </div>
+    <!-- /.col-md-4 -->
+    <div class="col-md-4">
+        <h2>Updates</h2>
+        <p><a href="http://mcupdate.tumblr.com/post/116645435739">Minecraft 1.8.4</a></p>
+
+        <p><a href="http://mcupdate.tumblr.com/post/113776184629">Minecraft 1.8.3</a></p>
+
+        <p><a href="http://mcupdate.tumblr.com/post/110056666619">Humble Card Game Bundle is over!</a></p>
+
+        <p><a href="http://mcupdate.tumblr.com/post/108661000799">Scrolls in Humble Card Game Bundle</a></p>
+
+        <p><a href="http://mcupdate.tumblr.com/post/104927495779">Scrolls Celebration Cape!</a></p>
+    </div>
+    <!-- /.col-md-4 -->
+</div>
+<!-- /.row -->
+{% endblock %}

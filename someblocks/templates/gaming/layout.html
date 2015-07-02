@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/someblocks_gaming.css') }}">
+{% endblock %}
+
+{% block navigation %}
+{% from "macros.html" import topnav %}
+<!-- Navigation -->
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">SomeBlocks  <i class="fa fa-gamepad"></i> Gaming</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                {{ topnav(endpoint='gaming.index', name='Home') }}
+                {{ topnav(endpoint='gaming.worlds', name='Worlds') }}
+                {{ topnav(endpoint='gaming.map', name='Live Map') }}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted pull-left">&copy; 2015 - <a href="http://someblocks.com">SomeBlocks.com</a></p>
+        <p class="text-muted pull-right"><span style="color: #48C9B0; font-size: 1.25em"><i class="fa fa-gamepad"></i></span> with <span style="color: #C23A23; font-size: 1.25em">&hearts;</span> in Austria.</p>
+    </div>
+</footer>
+{% endblock %}

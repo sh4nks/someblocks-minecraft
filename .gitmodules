@@ -1,3 +1,0 @@
-[submodule "app/libs/mcstatus"]
-	path = app/libs/mcstatus
-	url = https://github.com/sh4nks/mcstatus.git
