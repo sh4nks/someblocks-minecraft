@@ -95,7 +95,7 @@
         {% if ts3 and ts3["server"][0]["virtualserver_clientsonline"]|int > 1 %}
             <p>
             {% for player in ts3["clients"].values() %}
-                {% if player["client_type"] == 0 %}
+                {% if player["client_type"]|int == 0 %}
                     {{ player["client_nickname"] }}
                 {% endif %}
             {% endfor %}
