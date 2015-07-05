@@ -40,14 +40,14 @@
             <div class="server">
                 <strong>Minecraft Survival Server</strong>
                 <div class="status">
-                    {% if not stats == None %}
+                    {% if mc %}
                     <span class="badge badge-info">{{ config["MC_SERVER"] }}</span>
                     <span class="badge badge-success">online</span>
-                    <span class="badge">{{ stats.players.online }}/{{ stats.players.max }}</span>
+                    <span class="badge">{{ mc.players.online }}/{{ mc.players.max }}</span>
                     {% else %}
                     <span class="badge badge-info">{{ config["MC_SERVER"] }}</span>
                     <span class="badge badge-danger">offline</span>
-                    <span class="badge">0/20</span>
+                    <span class="badge">n/a</span>
                     {% endif %}
                 </div>
             </div>
@@ -63,7 +63,15 @@
             <div class="server">
                 <strong>TeamSpeak 3 Server</strong>
                 <div class="status">
-                    <span class="badge badge-info">someblocks.com</span> <span class="badge badge-warning">n/a</span> <span class="badge">0/20</span>
+                    {% if ts3 %}
+                    <span class="badge badge-info">{{ config["TS3_IP"] }}</span>
+                    <span class="badge badge-success">online</span>
+                    <span class="badge">{{ ts3["server"][0]["virtualserver_clientsonline"]-1 }}/{{ ts3["server"][0]["virtualserver_maxclients"] }}</span>
+                    {% else %}
+                    <span class="badge badge-info">{{ config["TS3_IP"] }}</span>
+                    <span class="badge badge-danger">offline</span>
+                    <span class="badge">n/a</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -71,7 +79,28 @@
     <!-- /.col-md-4 -->
     <div class="col-md-4">
         <h2>Online Players</h2>
+        <strong>Minecraft</strong>
+        {% if mc %}
+            <p>
+            {% for player in mc.players.names %}
+                {{ player }}
+            {% endfor %}
+            </p>
+        {% else %}
         <p>No players online.</p>
+        {% endif %}
+        <strong>Teamspeak</strong>
+        {% if ts3 %}
+            <p>
+            {% for player in ts3["clients"].values() %}
+                {% if player["client_type"] == 0 %}
+                    {{ player["client_nickname"] }}
+                {% endif %}
+            {% endfor %}
+            </p>
+        {% else %}
+        <p>No players online.</p>
+        {% endif %}
     </div>
     <!-- /.col-md-4 -->
     <div class="col-md-4">

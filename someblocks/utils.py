@@ -1,9 +1,30 @@
 import feedparser
 import mcstatus
+import ts3
 
 from flask import current_app
 
 from someblocks.extensions import cache
+
+
+@cache.cached(timeout=180, key_prefix="ts3_stats")
+def get_teamspeak_stats():
+    stats = None
+    try:
+        server = ts3.TS3Server(
+            ip=current_app.config["TS3_IP"],
+            port=current_app.config["TS3_PORT"],
+            id=current_app.config["TS3_VIRTUALSERVER_ID"]
+        )
+        server.login(
+            current_app.config["TS3_QUERYUSER"],
+            current_app.config["TS3_QUERYPASSWORD"]
+        )
+        stats = {"clients": server.clientlist(),
+                 "server": server.serverlist().data}
+    except:
+        stats = None
+    return stats
 
 
 def get_minecraft_stats():
