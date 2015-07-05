@@ -86,6 +86,8 @@
             <p>
             {% for player in mc.players.names %}
                 {{ player }}
+            {% else %}
+            <p>No players online</p>
             {% endfor %}
             </p>
         {% else %}
