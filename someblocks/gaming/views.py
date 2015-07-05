@@ -14,9 +14,9 @@ def index():
     return render_template("gaming/index.html", rss=rss, mc=mc, ts3=ts3)
 
 
-@gaming.route("/worlds")
-def worlds():
-    return render_template("gaming/worlds.html")
+@gaming.route("/server")
+def server():
+    return render_template("gaming/server.html")
 
 
 @gaming.route("/map")

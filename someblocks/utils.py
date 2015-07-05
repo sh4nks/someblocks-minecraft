@@ -16,10 +16,13 @@ def get_teamspeak_stats():
             port=current_app.config["TS3_PORT"],
             id=current_app.config["TS3_VIRTUALSERVER_ID"]
         )
-        server.login(
+        success = server.login(
             current_app.config["TS3_QUERYUSER"],
             current_app.config["TS3_QUERYPASSWORD"]
         )
+        if not success:
+            return stats
+
         stats = {"clients": server.clientlist(),
                  "server": server.serverlist().data}
     except:

@@ -1,3 +1,5 @@
+{% set page_title = "SomeBlocks Gaming | Home" %}
+
 {% extends "gaming/layout.html" %}
 {% block content %}
 <!-- Heading Row -->
@@ -66,7 +68,7 @@
                     {% if ts3 %}
                     <span class="badge badge-info">{{ config["TS3_IP"] }}</span>
                     <span class="badge badge-success">online</span>
-                    <span class="badge">{{ ts3["server"][0]["virtualserver_clientsonline"]-1 }}/{{ ts3["server"][0]["virtualserver_maxclients"] }}</span>
+                    <span class="badge">{{ ts3["server"][0]["virtualserver_clientsonline"]|int - 1 }}/{{ ts3["server"][0]["virtualserver_maxclients"] }}</span>
                     {% else %}
                     <span class="badge badge-info">{{ config["TS3_IP"] }}</span>
                     <span class="badge badge-danger">offline</span>
