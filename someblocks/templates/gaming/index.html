@@ -107,15 +107,13 @@
     <!-- /.col-md-4 -->
     <div class="col-md-4">
         <h2>Updates</h2>
-        <p><a href="http://mcupdate.tumblr.com/post/116645435739">Minecraft 1.8.4</a></p>
-
-        <p><a href="http://mcupdate.tumblr.com/post/113776184629">Minecraft 1.8.3</a></p>
-
-        <p><a href="http://mcupdate.tumblr.com/post/110056666619">Humble Card Game Bundle is over!</a></p>
-
-        <p><a href="http://mcupdate.tumblr.com/post/108661000799">Scrolls in Humble Card Game Bundle</a></p>
-
-        <p><a href="http://mcupdate.tumblr.com/post/104927495779">Scrolls Celebration Cape!</a></p>
+        {% if rss %}
+            {% for title, link in rss %}
+                <p><a href="{{ link }}">{{ title }}</a></p>
+            {% endfor %}
+            {% else %}
+                <p>Couldn't find an RSS feed. Is your link correct?</p>
+        {% endif %}
     </div>
     <!-- /.col-md-4 -->
 </div>
