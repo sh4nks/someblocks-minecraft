@@ -6,7 +6,7 @@ DEBUG = True
 SECRET_KEY = "SecretKeyForSessionSigning"
 
 # Caching
-CACHE_TYPE = "null"
+CACHE_TYPE = "simple"
 
 # App specific configurations
 ## RSS

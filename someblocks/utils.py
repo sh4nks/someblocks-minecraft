@@ -3,14 +3,16 @@ import mcstatus
 
 from flask import current_app
 
-from .extensions import cache
+from someblocks.extensions import cache
 
 
-@cache.cached(timeout=60, key_prefix="minecraft_stats")
 def get_minecraft_stats():
     try:
-        server = mcstatus.MinecraftServer(current_app.config["MC_SERVER"],
-                                          current_app.config["MC_PORT"])
+        server = mcstatus.MinecraftServer(
+            host=current_app.config["MC_SERVER"],
+            port=current_app.config["MC_PORT"]
+        )
+
         query = server.query()
     except:
         query = None

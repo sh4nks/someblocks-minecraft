@@ -20,7 +20,7 @@
 
 <hr>
 
-<!-- 
+<!--
 <div class="row">
     <div class="col-lg-12">
         <div class="alert alert-success">
@@ -40,13 +40,23 @@
             <div class="server">
                 <strong>Minecraft Survival Server</strong>
                 <div class="status">
-                    <span class="badge badge-info">someblocks.com</span> <span class="badge badge-success">online</span> <span class="badge">0/20</span>
+                    {% if not stats == None %}
+                    <span class="badge badge-info">{{ config["MC_SERVER"] }}</span>
+                    <span class="badge badge-success">online</span>
+                    <span class="badge">{{ stats.players.online }}/{{ stats.players.max }}</span>
+                    {% else %}
+                    <span class="badge badge-info">{{ config["MC_SERVER"] }}</span>
+                    <span class="badge badge-danger">offline</span>
+                    <span class="badge">0/20</span>
+                    {% endif %}
                 </div>
             </div>
             <div class="server">
                 <strong>Minecraft Creative Server</strong>
                 <div class="status">
-                    <span class="badge badge-info">someblocks.com:25566</span> <span class="badge badge-danger">offline</span> <span class="badge">0/20</span>
+                    <span class="badge badge-info">someblocks.com:25566</span>
+                    <span class="badge badge-danger">offline</span>
+                    <span class="badge">0/20</span>
                 </div>
             </div>
 
