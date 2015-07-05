@@ -92,7 +92,7 @@
         <p>No players online.</p>
         {% endif %}
         <strong>Teamspeak</strong>
-        {% if ts3 %}
+        {% if ts3 and ts3["server"][0]["virtualserver_clientsonline"]|int > 1 %}
             <p>
             {% for player in ts3["clients"].values() %}
                 {% if player["client_type"] == 0 %}
