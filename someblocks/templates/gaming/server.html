@@ -22,13 +22,40 @@ This includes:
 If you have further questions please feel free to contact us.
 </p>
 
+<p>
+    All of our previous worlds are available for download sorted by date from oldest to newest. In addition to that, they also have a label appended to the name, which describes if the world was a <span class="label label-success">survival</span> world or <span class="label label-info">creative</span> world.
+</p>
+
 <br /><br />
 <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">Downloads</h3>
   </div>
   <div class="panel-body">
-    Our old worlds are currently not available!
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Preview Map</th>
+                <th>Size</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for world in old_worlds %}
+        <tr>
+            <td>{{ world.name }} <span class="label label-success">{{ world.gamemode }}</span></td>
+            {% if world.preview_uri %}
+            <td><a class="btn btn-default btn-xs" href="{{ world.preview_uri }}"><i class="fa fa-eye"></i> Preview</a></td>
+            {% else %}
+            <td>No Preview</td>
+            {% endif %}
+            <td>{{ world.size }}</td>
+            <td><a class="btn btn-primary btn-xs" href="{{ world.download_uri }}"><i class="fa fa-download"></i> Download</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
   </div>
 </div>
 

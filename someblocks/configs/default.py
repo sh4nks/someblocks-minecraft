@@ -15,7 +15,7 @@ RSS_MCUPDATES = "http://mcupdate.tumblr.com/rss"
 # Minecraft Query
 MC_SERVER = "someblocks.com"
 MC_PORT = 25565
-MC_LIVE_MAP_URL = ""
+MC_LIVE_MAP_URL = "gaming.someblocks.com/map"
 
 # Teamspeak 3 Query
 TS3_IP = "someblocks.com"

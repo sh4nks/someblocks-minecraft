@@ -82,17 +82,18 @@
     <div class="col-md-4">
         <h2>Online Players</h2>
         <strong>Minecraft</strong>
+        <p>
         {% if mc %}
-            <p>
             {% for player in mc.players.names %}
                 {{ player }}
             {% else %}
-            <p>No players online</p>
+            No players online
             {% endfor %}
-            </p>
+
         {% else %}
-        <p>No players online.</p>
+        No players online.
         {% endif %}
+        <p>
         <strong>Teamspeak</strong>
         {% if ts3 and ts3["server"][0]["virtualserver_clientsonline"]|int > 1 %}
             <p>
